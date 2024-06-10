@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Formulario Circuito</title>
+</head>
+<body>
+  <div class="container">
+    <div class="atras">
+      <svg id="fi_5791165" (click)="VolverCrud()" height="40" viewBox="0 0 512 512" width="40" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"><path d="m125 0h262c68.848 0 125 56.152 125 125v262c0 68.848-56.152 125-125 125h-262c-68.848 0-125-56.152-125-125v-262c0-68.848 56.152-125 125-125zm77.255 403.209 31.136-31.165-48.017-48.044h118.372a107.358 107.358 0 0 0 107.261-107.233v-.743a107.358 107.358 0 0 0 -107.261-107.232h-171.589v44.075h171.589a63.239 63.239 0 0 1 63.185 63.157v.743a63.239 63.239 0 0 1 -63.185 63.156h-118.372l48.017-48.017-31.136-31.164-101.262 101.233z" fill="#ef314c" fill-rule="evenodd"></path></svg>
+    </div>
+    @if (idioma == 'es') {
+      <h1 class="mt-5 text-center titulo">Formulario de Circuito</h1>
+    <form [formGroup]="frm" (submit)="comprobarDatos()" autocomplete="off">
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" formControlName="nombre" placeholder="Ingrese nombre circuito">
+        @if (frm.get('nombre')?.errors?.['required'] && nombre.dirty) {
+            <small class="text-danger font-italic">Dato requerido</small>
+          }
+      </div>
+      <div class="mb-3">
+        <label for="localización" class="form-label">Localización</label>
+        <input type="text" class="form-control" formControlName="localizacion" placeholder="Ingrese localización circuito">
+        @if (frm.get('localizacion')?.errors?.['required'] && localizacion.dirty) {
+            <small class="text-danger font-italic">Dato requerido</small>
+          }
+      </div>
+      <div class="mb-3">
+        <label for="localización" class="form-label">Distancia</label>
+        <input type="number" class="form-control" formControlName="distancia" placeholder="Ingrese distancia circuito">
+        @if (frm.get('distancia')?.errors?.['required'] && distancia.dirty) {
+            <small class="text-danger font-italic">Dato requerido</small>
+          }
+      </div>
+      <div class="mb-3">
+        <label for="localización" class="form-label">Imagen</label>
+        <input type="file" class="form-control" formControlName="imagen" placeholder="Ingrese nombre imagen">
+        @if (frm.get('imagen')?.errors?.['required'] && imagen.dirty) {
+            <small class="text-danger font-italic">Dato requerido</small>
+        }@else if (frm.get('imagen')?.errors?.['pattern']) {
+            <small class="text-danger font-italic">Formato incorrecto (debe contener la extensión .png o .jpg)</small>
+          }
+      </div>
+      <div class="mb-3">
+        <label for="localización" class="form-label">Imagen Diseño Circuito</label>
+        <input type="file" class="form-control" formControlName="imagen_trazado" placeholder="Ingrese nombre imagen">
+        @if (frm.get('imagen')?.errors?.['required'] && imagen.dirty) {
+            <small class="text-danger font-italic">Dato requerido</small>
+        }@else if (frm.get('imagen_trazado')?.errors?.['pattern']) {
+            <small class="text-danger font-italic">Formato incorrecto (debe contener la extensión .png o .jpg)</small>
+          }
+      </div>
+      <div class="mb-3">
+        <label for="mensaje" class="form-label">Descripción</label>
+        <textarea class="form-control" formControlName="descripcion" rows="3" placeholder="Ingrese descripción circuito"></textarea>
+        @if (frm.get('descripcion')?.errors?.['required'] && descripcion.dirty) {
+          <small class="text-danger font-italic">Dato requerido</small>
+      }
+      </div>
+      <div class="mb-3">
+        <label for="mensaje" class="form-label">Descripción Inglés</label>
+        <textarea class="form-control" formControlName="descripcion_en" rows="3" placeholder="Ingrese descripción circuito en inglés"></textarea>
+        @if (frm.get('descripcion_en')?.errors?.['required'] && descripcion_en.dirty) {
+          <small class="text-danger font-italic">Dato requerido</small>
+      }
+      </div>
+      <div class="botones">
+        <button type="submit" [disabled]="frm.invalid" class="btn btn-primary btn-block  gradient-custom-2 mb-3">{{textoBoton}}</button>
+      </div>
+    </form>
+    }@else {
+      <h1 class="mt-5 text-center titulo">Circuit Form</h1>
+    <form [formGroup]="frm" (submit)="comprobarDatos()" autocomplete="off">
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Name</label>
+        <input type="text" class="form-control" formControlName="nombre" placeholder="Enter circuit name">
+        @if (frm.get('nombre')?.errors?.['required'] && nombre.dirty) {
+            <small class="text-danger font-italic">Required Data</small>
+          }
+      </div>
+      <div class="mb-3">
+        <label for="localización" class="form-label">Location</label>
+        <input type="text" class="form-control" formControlName="localizacion" placeholder="Enter circuit location">
+        @if (frm.get('localizacion')?.errors?.['required'] && localizacion.dirty) {
+            <small class="text-danger font-italic">Required Data</small>
+          }
+      </div>
+      <div class="mb-3">
+        <label for="localización" class="form-label">Distance</label>
+        <input type="number" class="form-control" formControlName="distancia" placeholder="Enter circuit distance">
+        @if (frm.get('distancia')?.errors?.['required'] && distancia.dirty) {
+            <small class="text-danger font-italic">Dato requerido</small>
+          }
+      </div>
+      <div class="mb-3">
+        <label for="localización" class="form-label">Image</label>
+        <input type="file" class="form-control" formControlName="imagen">
+        @if (frm.get('imagen')?.errors?.['required'] && imagen.dirty) {
+            <small class="text-danger font-italic">Required Data</small>
+        }@else if (frm.get('imagen')?.errors?.['pattern']) {
+            <small class="text-danger font-italic">Incorrect format (must contain .png or .jpg extension)</small>
+          }
+      </div>
+      <div class="mb-3">
+        <label for="localización" class="form-label">Circuit Design Image</label>
+        <input type="file" class="form-control" formControlName="imagen_trazado">
+        @if (frm.get('imagen')?.errors?.['required'] && imagen.dirty) {
+            <small class="text-danger font-italic">Required Data</small>
+        }@else if (frm.get('imagen_trazado')?.errors?.['pattern']) {
+            <small class="text-danger font-italic">Incorrect format (must contain .png or .jpg extension)</small>
+          }
+      </div>
+      <div class="mb-3">
+        <label for="mensaje" class="form-label">Description in spanish</label>
+        <textarea class="form-control" formControlName="descripcion" rows="3" placeholder="Enter circuit description in spanish"></textarea>
+        @if (frm.get('descripcion')?.errors?.['required'] && descripcion.dirty) {
+          <small class="text-danger font-italic">Required Data</small>
+      }
+      </div>
+      <div class="mb-3">
+        <label for="mensaje" class="form-label">Description</label>
+        <textarea class="form-control" formControlName="descripcion_en" rows="3" placeholder="Ingrese descripción circuito"></textarea>
+        @if (frm.get('descripcion_en')?.errors?.['required'] && descripcion.dirty) {
+          <small class="text-danger font-italic">Required Data</small>
+      }
+      </div>
+      <div class="botones">
+        <button type="submit" [disabled]="frm.invalid" class="btn btn-primary btn-block  gradient-custom-2 mb-3">{{textoBoton}}</button>
+      </div>
+    </form>
+    }
+  </div>
+</body>
+</html>
+

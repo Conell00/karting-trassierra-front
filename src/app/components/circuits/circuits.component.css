@@ -1,0 +1,52 @@
+#header {
+    background: url(https://images.unsplash.com/photo-1415795854641-f4a487a0fdc8?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80) center center / cover no-repeat ;
+  }
+
+.cabezera{
+    text-align: center;
+}
+
+.titulo{
+font-family: Arial Black;
+font-weight: bold; font-size: 50px;
+background: #202020;
+-webkit-background-clip: text;
+-moz-background-clip: text;
+background-clip: text;
+color: transparent;
+text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(254, 3, 3, 0.99);
+margin-top: 50px;
+margin-bottom: 0px;
+line-height: 60px;
+}
+
+.card-body{
+  background: linear-gradient(to right,rgba(255, 80, 80, 0.99), rgba(254, 3, 3, 0.99), rgba(92, 2, 2, 0.99), rgba(52, 2, 2, 0.99)); /* Degradado progresivo entre 4 colores */
+  color: white;
+}
+
+.btn{
+  background: white;
+}
+
+.btn:hover{
+  background-color: black;
+}
+
+.container {
+  margin-top: 50px;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 50px;
+}
+
+img{
+  height: 200px;
+}
+
+.card-title{
+  font-size: 25px;
+}
+

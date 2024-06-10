@@ -1,0 +1,51 @@
+.titulo{
+    font-family: Arial Black;
+    font-weight: bold; font-size: 40px;
+    background: #202020;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(254, 3, 3, 0.99);
+    margin-top: 30px;
+    margin-bottom: 50px ;
+    line-height: 40px;
+    }
+
+.nombre{
+    font-weight: bold; font-size: 35px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-weight: bold; font-size: 25px;
+}
+.author img {
+    width: 50%;
+    height: auto;
+    display: block;
+}
+footer {
+    background: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.container {
+    margin-top: 50px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 50px;
+}
+
+.content ul {
+    list-style-type: none; /* Elimina los puntos de la lista */
+    padding: 0; /* Elimina el padding de la lista */
+}
+
+img{
+    width: 300px;
+}

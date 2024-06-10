@@ -1,0 +1,232 @@
+.titulo{
+    font-family: Arial Black;
+    font-weight: bold; font-size: 60px;
+    background: #202020;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(254, 3, 3, 0.99);
+    line-height: 50px;
+    margin-bottom: 5%;
+    margin-right: 6%;
+    margin-top: 3%;
+    }
+
+.valores{
+    font-family: Arial Black;
+    font-weight: bold; font-size: 40px;
+    background: #202020;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+     background-clip: text;
+    color: transparent;
+    text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(254, 3, 3, 0.99);
+    }
+
+.bronce{
+    font-family: Arial Black;
+    font-weight: bold; font-size: 40px;
+    background: #202020;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px #CD7F32;
+    }
+.plata{
+    font-family: Arial Black;
+    font-weight: bold; font-size: 40px;
+    background: #202020;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px #C0C0C0;
+    }
+.oro{
+    font-family: Arial Black;
+    font-weight: bold; font-size: 40px;
+    background: #202020;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+     background-clip: text;
+     color: transparent;
+    text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px #FFD700;
+    }
+
+.diamante{
+    font-family: Arial Black;
+    font-weight: bold; font-size: 40px;
+    background: #202020;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px #B9F2FF;
+    }
+
+.profile-img {
+        object-fit: cover;
+        margin-bottom: 20px;
+}
+
+.table thead {
+    background: linear-gradient(to right,rgba(255, 80, 80, 0.99), rgba(254, 3, 3, 0.99), rgba(92, 2, 2, 0.99), rgba(52, 2, 2, 0.99)); /* Degradado progresivo entre 4 colores */
+    color: white;
+    font-size: 25px;
+  }
+  .table-rounded {
+    border-radius: 10px;
+    overflow: hidden;
+    background: linear-gradient(to right,rgba(255, 80, 80, 0.99), rgba(254, 3, 3, 0.99), rgba(92, 2, 2, 0.99), rgba(52, 2, 2, 0.99)); /* Degradado progresivo entre 4 colores */
+    color: white;
+  }
+
+  .indicadores{
+    color: white;
+    background: rgba(255, 80, 80, 0.99);
+  }
+
+  td{
+    background: rgba(52, 2, 2, 0.99);
+    color: white;
+    font-size: 20px;
+  }
+
+  td:hover{
+    background:  rgba(254, 3, 3, 0.99);
+  }
+
+  .btn{
+    background: linear-gradient(to right,rgba(255, 80, 80, 0.99), rgba(254, 3, 3, 0.99), rgba(92, 2, 2, 0.99), rgba(52, 2, 2, 0.99)); /* Degradado progresivo entre 4 colores */
+    width: 100%;
+    height: 50px;
+    text-align:center;
+    border-radius: 10px;
+  }
+  
+
+.modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+}
+
+/* Estilos para el contenido de la ventana modal */
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Animación para la ventana modal */
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* Estilos para el botón de cerrar */
+.close {
+  margin-left: 430px;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.container {
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 290px;
+  margin-top: 20%;
+}
+
+.botones{
+  display: flex;
+  gap: 5%;
+  width: 100%;
+  }
+
+  .boton{
+    display: flex;
+    width: 70%;
+    margin-left: 15%;
+    }
+
+  .boton-modal{
+    margin-top: 10% !important;
+    width: 80%;
+  }
+
+  .titulo-modal{
+    font-family: Arial Black;
+    font-weight: bold; font-size: 35px;
+    background: #202020;
+    -webkit-background-clip: text;
+    -moz-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0px 3px 3px rgba(255,255,255,0.4),0px -1px 1px rgba(254, 3, 3, 0.99);
+    line-height: 50px;
+    margin-top: 5%;
+    }
+
+    .texto{
+      font-size: 31px;
+      margin-left: 2%;
+      margin-right: 2%;
+    }
+
+
+@media (max-width: 900px) {
+  .valores{
+    font-size: 27px;
+  }
+  .texto{
+    font-size: 25px;
+  }
+  .datos{
+      text-align: center;
+      margin-top: 2%;
+  }
+  .table thead {
+    font-size: 20px;
+  }
+  .botones{
+      display: flex;
+      gap: 5%;
+      flex-direction: column;
+      width: 90%;
+      margin-left: 6%;
+      margin-bottom: 5%;
+  }
+  .btn{
+    margin-top: 5%;
+  }
+
+  .close {
+    margin-left: 90%;
+  }
+
+  .boton{
+   margin-bottom: 4%;
+    }
+   }

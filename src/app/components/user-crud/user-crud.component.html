@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabla Bootstrap</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+  @if (idioma == 'es') {
+  <h1 class="text-center titulo">Usuarios Karting Trassierra</h1>
+  <div class="d-flex flex-column align-items-center">
+    <table class="table table-rounded align-middle mb-3">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th class="movilNo" scope="col">Email</th>
+            <th scope="col">Rol</th>
+            <th class="movilNo" scope="col">Puntos</th>
+            <th class="movilNo" scope="col">Torneos Ganados</th>
+            <th class="movilNo" scope="col">Carreras Ganadas</th>
+            <th class="movilNo" scope="col">Podios</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+            @for (usuario of aUsuarios; track $index) {
+                <tr>
+                    <td>{{usuario.id}}</td>
+                    <td>{{usuario.nombre}}</td>
+                    <td class="movilNo">{{usuario.email}}</td>
+                    <td>{{usuario.rol}}</td>
+                    <td class="movilNo">{{usuario.puntos}}</td>
+                    <td class="movilNo">{{usuario.torneos_ganados}}</td>
+                    <td class="movilNo">{{usuario.carreras_ganadas}}</td>
+                    <td class="movilNo">{{usuario.podios}}</td>
+                    <td class="acciones">
+                        <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-highlighter" viewBox="0 0 16 16" (click)="formularioEditar(usuario.id)">
+                            <path fill-rule="evenodd" d="M11.096.644a2 2 0 0 1 2.791.036l1.433 1.433a2 2 0 0 1 .035 2.791l-.413.435-8.07 8.995a.5.5 0 0 1-.372.166h-3a.5.5 0 0 1-.234-.058l-.412.412A.5.5 0 0 1 2.5 15h-2a.5.5 0 0 1-.354-.854l1.412-1.412A.5.5 0 0 1 1.5 12.5v-3a.5.5 0 0 1 .166-.372l8.995-8.07zm-.115 1.47L2.727 9.52l3.753 3.753 7.406-8.254zm3.585 2.17.064-.068a1 1 0 0 0-.017-1.396L13.18 1.387a1 1 0 0 0-1.396-.018l-.068.065zM5.293 13.5 2.5 10.707v1.586L3.707 13.5z"/>
+                          </svg>
+                        <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16" (click)="eliminarUsuario(usuario)">
+                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                      </svg>
+                      @if (admin != usuario.id) {
+                        <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-envelope-arrow-up" viewBox="0 0 16 16" (click)="modalMensaje(usuario.id,usuario.nombre)">
+                          <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4.5a.5.5 0 0 1-1 0V5.383l-7 4.2-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h5.5a.5.5 0 0 1 0 1H2a2 2 0 0 1-2-1.99zm1 7.105 4.708-2.897L1 5.383zM1 4v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1"/>
+                          <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.354-5.354 1.25 1.25a.5.5 0 0 1-.708.708L13 12.207V14a.5.5 0 0 1-1 0v-1.717l-.28.305a.5.5 0 0 1-.737-.676l1.149-1.25a.5.5 0 0 1 .722-.016"/>
+                        </svg>
+                      }
+                    </td>
+                  </tr>
+            }
+          <!-- Puedes agregar más filas aquí si es necesario -->
+        </tbody>
+      </table>
+      <div class="botones">
+      <button class="btn btn-primary" (click)="formularioCrear()"><h2>Añadir Usuario</h2></button>
+      <button class="btn btn-primary" (click)="volverMenu()"><h2>Volver Atrás</h2></button>
+      </div>
+  </div>
+  <div id="myModal" class="modal" style="display: none;">
+    <div class="modal-content">
+        <span class="close" (click)="cerrarModalMensaje()">
+            <svg enable-background="new 0 0 64 64" height="32" viewBox="0 0 64 64" width="32" xmlns="http://www.w3.org/2000/svg" id="fi_3588762"><g id="Icons"><g><g><path d="m32 58c-14.359 0-26-11.641-26-26 0-14.359 11.641-26 26-26 14.359 0 26 11.641 26 26 0 14.359-11.641 26-26 26z" fill="#fa6450"></path></g><g><path d="m10 32c0-13.686 10.576-24.894 24-25.916-.661-.05-1.326-.084-2-.084-14.359 0-26 11.641-26 26 0 14.359 11.641 26 26 26 .674 0 1.339-.034 2-.084-13.424-1.022-24-12.23-24-25.916z" fill="#dc4632"></path></g><g><g><path d="m16.444 27.757h31.113v8.485h-31.113z" fill="#f0f0f0" transform="matrix(.707 -.707 .707 .707 -13.255 32)"></path></g><g><path d="m27.757 16.444h8.485v31.113h-8.485z" fill="#f0f0f0" transform="matrix(.707 -.707 .707 .707 -13.255 32)"></path></g></g></g></g></svg>
+        </span>
+        <h2 class="titulo-modal text-center">Enviar mensaje a {{receptorMensajeNombre}}</h2>
+        <form [formGroup]="frm" (submit)="enviarMensaje()" autocomplete="off">
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example11">Mensaje</label>
+            <textarea class="form-control" formControlName="cuerpo" rows="3" placeholder="Introduzca mensaje"></textarea>
+            @if (frm.get('cuerpo')?.errors?.['required']) {
+              <small class="text-danger font-italic">Dato requerido</small>
+            }
+          </div>
+          <div class="form-outline mb-4">
+            <label class="form-label" for="form2Example11">Mensaje inglés</label>
+            <textarea class="form-control" formControlName="cuerpo_en" rows="3" placeholder="Introduzca mensaje en inglés"></textarea>
+            @if (frm.get('cuerpo_en')?.errors?.['required']) {
+              <small class="text-danger font-italic">Dato requerido</small>
+            }
+          </div>
+            <div class="text-center pt-1 mb-5 pb-1">
+              <button type="submit" [disabled]="frm.invalid" class="btn btn-primary btn-block  gradient-custom-2 mb-3 boton-modal">Enviar Mensaje</button>
+            </div>
+          </form>
+    </div>
+</div>
+  }@else {
+    <h1 class="text-center titulo">Users Karting Trassierra</h1>
+  <div class="d-flex flex-column align-items-center">
+    <table class="table table-rounded align-middle mb-3">
+        <thead>
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th class="movilNo" scope="col">Email</th>
+            <th scope="col">Rol</th>
+            <th class="movilNo" scope="col">Points</th>
+            <th class="movilNo" scope="col">Tournaments Won</th>
+            <th class="movilNo" scope="col">Races Won</th>
+            <th class="movilNo" scope="col">Podiums</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (usuario of aUsuarios; track $index) {
+            <tr>
+                <td>{{usuario.id}}</td>
+                <td>{{usuario.nombre}}</td>
+                <td class="movilNo">{{usuario.email}}</td>
+                <td>{{traducirRol(usuario.rol)}}</td>
+                <td class="movilNo">{{usuario.puntos}}</td>
+                <td class="movilNo">{{usuario.torneos_ganados}}</td>
+                <td class="movilNo">{{usuario.carreras_ganadas}}</td>
+                <td class="movilNo">{{usuario.podios}}</td>
+                <td class="acciones">
+                    <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-highlighter" viewBox="0 0 16 16" (click)="formularioEditar(usuario.id)">
+                        <path fill-rule="evenodd" d="M11.096.644a2 2 0 0 1 2.791.036l1.433 1.433a2 2 0 0 1 .035 2.791l-.413.435-8.07 8.995a.5.5 0 0 1-.372.166h-3a.5.5 0 0 1-.234-.058l-.412.412A.5.5 0 0 1 2.5 15h-2a.5.5 0 0 1-.354-.854l1.412-1.412A.5.5 0 0 1 1.5 12.5v-3a.5.5 0 0 1 .166-.372l8.995-8.07zm-.115 1.47L2.727 9.52l3.753 3.753 7.406-8.254zm3.585 2.17.064-.068a1 1 0 0 0-.017-1.396L13.18 1.387a1 1 0 0 0-1.396-.018l-.068.065zM5.293 13.5 2.5 10.707v1.586L3.707 13.5z"/>
+                      </svg>
+                    <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16" (click)="eliminarUsuario(usuario)">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                  </svg>
+                  @if (admin != usuario.id) {
+                    <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-envelope-arrow-up" viewBox="0 0 16 16" (click)="modalMensaje(usuario.id,usuario.nombre)">
+                      <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4.5a.5.5 0 0 1-1 0V5.383l-7 4.2-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h5.5a.5.5 0 0 1 0 1H2a2 2 0 0 1-2-1.99zm1 7.105 4.708-2.897L1 5.383zM1 4v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1"/>
+                      <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.354-5.354 1.25 1.25a.5.5 0 0 1-.708.708L13 12.207V14a.5.5 0 0 1-1 0v-1.717l-.28.305a.5.5 0 0 1-.737-.676l1.149-1.25a.5.5 0 0 1 .722-.016"/>
+                    </svg>
+                  }
+                </td>
+              </tr>
+        }
+        </tbody>
+      </table>
+      <div class="botones">
+      <button class="btn btn-primary" (click)="formularioCrear()"><h2>Add User</h2></button>
+      <button class="btn btn-primary" (click)="volverMenu()"><h2>Go Back</h2></button>
+      </div>
+  </div>
+  }
+</div>
+<div id="myModal" class="modal" style="display: none;">
+<div class="modal-content">
+  <span class="close" (click)="cerrarModalMensaje()">
+      <svg enable-background="new 0 0 64 64" height="32" viewBox="0 0 64 64" width="32" xmlns="http://www.w3.org/2000/svg" id="fi_3588762"><g id="Icons"><g><g><path d="m32 58c-14.359 0-26-11.641-26-26 0-14.359 11.641-26 26-26 14.359 0 26 11.641 26 26 0 14.359-11.641 26-26 26z" fill="#fa6450"></path></g><g><path d="m10 32c0-13.686 10.576-24.894 24-25.916-.661-.05-1.326-.084-2-.084-14.359 0-26 11.641-26 26 0 14.359 11.641 26 26 26 .674 0 1.339-.034 2-.084-13.424-1.022-24-12.23-24-25.916z" fill="#dc4632"></path></g><g><g><path d="m16.444 27.757h31.113v8.485h-31.113z" fill="#f0f0f0" transform="matrix(.707 -.707 .707 .707 -13.255 32)"></path></g><g><path d="m27.757 16.444h8.485v31.113h-8.485z" fill="#f0f0f0" transform="matrix(.707 -.707 .707 .707 -13.255 32)"></path></g></g></g></g></svg>
+  </span>
+  <h2 class="titulo-modal text-center">Send message to {{receptorMensajeNombre}}</h2>
+  <form [formGroup]="frm" (submit)="enviarMensaje()" autocomplete="off">
+    <div class="form-outline mb-4">
+      <label class="form-label" for="form2Example11">Message</label>
+      <textarea class="form-control" formControlName="cuerpo" rows="3" placeholder="Enter message"></textarea>
+      @if (frm.get('cuerpo')?.errors?.['required']) {
+        <small class="text-danger font-italic">Required Data</small>
+      }
+    </div>
+    <div class="form-outline mb-4">
+      <label class="form-label" for="form2Example11">English message</label>
+      <textarea class="form-control" formControlName="cuerpo_en" rows="3" placeholder="Enter message in English"></textarea>
+      @if (frm.get('cuerpo_en')?.errors?.['required']) {
+        <small class="text-danger font-italic">Required Data</small>
+      }
+    </div>
+      <div class="text-center pt-1 mb-5 pb-1">
+        <button type="submit" [disabled]="frm.invalid" class="btn btn-primary btn-block  gradient-custom-2 mb-3 boton-modal">Send Message</button>
+      </div>
+    </form>
+</div>
+</div>
+</body>
+</html>
+
+

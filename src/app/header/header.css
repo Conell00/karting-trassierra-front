@@ -1,0 +1,30 @@
+.navbar{
+    background: linear-gradient(to right,rgba(255, 80, 80, 0.99), rgba(254, 3, 3, 0.99), rgba(92, 2, 2, 0.99), rgba(52, 2, 2, 0.99)); /* Degradado progresivo entre 4 colores */
+    color: white;
+}
+
+.texto{
+    color: whitesmoke;
+}
+
+.navbar-brand{
+    color: aqua;
+}
+
+.nav-link{
+    color: aliceblue;
+}
+
+a{
+    font-size: 24px;
+}
+
+.navegadorDerecha{
+    margin-top: 3%;
+}
+
+
+
+
+
+
