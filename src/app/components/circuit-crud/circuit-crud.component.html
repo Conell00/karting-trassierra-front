@@ -9,6 +9,7 @@
 <body>
 
 <div class="container">
+  <!--If para averiguar el idioma establecido en la página-->
   @if (idioma == 'es') {
   <h1 class="text-center titulo">Circuitos Karting Trassierra</h1>
   <div class="d-flex flex-column align-items-center">
@@ -26,6 +27,7 @@
           </tr>
         </thead>
         <tbody>
+          <!--For empleado para mostrar todos los circuitos-->
             @for (circuito of aCircuitos; track $index) {
                 <tr>
                     <td>{{circuito.id}}</td>
@@ -46,7 +48,6 @@
                     </td>
                   </tr>
             }
-          <!-- Puedes agregar más filas aquí si es necesario -->
         </tbody>
       </table>
       <div class="botones">
@@ -71,6 +72,7 @@
           </tr>
         </thead>
         <tbody>
+          <!--For empleado para mostrar todos -->
             @for (circuito of aCircuitos; track $index) {
                 <tr>
                     <td>{{circuito.id}}</td>

@@ -3,6 +3,7 @@
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-xl-10">
+          <!--If para averiguar el idioma establecido en la página-->
           @if (idioma == 'es') {
             <div class="card rounded-3 text-black">
               <div class="row g-0">
@@ -145,8 +146,10 @@
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example11">Email</label>
                         <input type="email" class="form-control" formControlName="email"  aria-describedby="emailHelp" />
+                        <!--If empleado para saber si este campo está relleno-->
                         @if (frm.get('email')?.errors?.['required'] && email.dirty) {
                           <small class="text-danger font-italic">Dato requerido</small>
+                        <!--If empleado para saber si este campo está correcto-->
                         }@else if (frm.get('email')?.errors?.['email']) {
                           <small class="text-danger font-italic">Formato incorrecto</small>
                         }
@@ -156,6 +159,7 @@
                         <div class="input-group">
                           <input type="password" class="form-control" formControlName="contra" id="contra">
                           <span class="input-group-text" (click)="mostrarContra()">
+                            <!--If empleado para mostrar o ocultar la contraseña-->
                             @if (esVisible == false) {
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16" id="spanContra">
                                 <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
@@ -170,6 +174,7 @@
                             }
                             </span>
                         </div>
+                         <!--If empleado para saber si este campo está relleno-->
                         @if (frm.get('contra')?.errors?.['required'] && contra.dirty) {
                           <small  class="text-danger font-italic">Dato requerido</small>
                         }
@@ -335,8 +340,10 @@
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example11">Email</label>
                         <input type="email" class="form-control" formControlName="email"  aria-describedby="emailHelp" />
+                         <!--If empleado para saber si este campo está relleno-->
                         @if (frm.get('email')?.errors?.['required'] && email.dirty) {
                           <small class="text-danger font-italic">Required Data</small>
+                         <!--If empleado para saber si este campo está correcto-->
                         }@else if (frm.get('email')?.errors?.['email']) {
                           <small class="text-danger font-italic">Incorrect format</small>
                         }
@@ -347,6 +354,7 @@
                         <div class="input-group">
                           <input type="password" class="form-control" formControlName="contra" id="contra">
                           <span class="input-group-text" (click)="mostrarContra()">
+                            <!--If empleado para mostrar o ocultar la contraseña-->
                             @if (esVisible == false) {
                               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16" id="spanContra">
                                 <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
@@ -361,6 +369,7 @@
                             }
                             </span>
                         </div>
+                        <!--If empleado para saber si este campo está relleno-->
                         @if (frm.get('contra')?.errors?.['required'] && contra.dirty) {
                           <small  class="text-danger font-italic">Required Data</small>
                         }

@@ -59,7 +59,7 @@ export class CircuitFormComponent implements OnInit {
   }
 
   /**
-   * Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
+   * @description Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
    * En caso de ya estar creada la cookie se establece la variable idioma según el valor de estar.
    */
 
@@ -71,6 +71,10 @@ export class CircuitFormComponent implements OnInit {
       this.idioma = this.cookies.get('idioma')
     }
   }
+
+  /**
+   * Getters
+   */
 
   get nombre(){
     return this.frm.get('nombre') as FormControl
@@ -94,6 +98,11 @@ export class CircuitFormComponent implements OnInit {
     return this.frm.get('descripcion_en') as FormControl
   }
 
+  /**
+ * @description Método empleado para saber si el usuario que ha entrado es administrador o no.
+ * En caso de que sea administrador no se permitirá su acceso a esta página
+ */
+
   verificarUsuario(){
     this.serv_usuarios.getUsuarioId(parseInt(this.cookies.get('token'))).subscribe(
       res=>{
@@ -108,10 +117,18 @@ export class CircuitFormComponent implements OnInit {
     )
 }
 
+/**
+ * @description Método empleado para volver hacía atrás
+ */
+
 VolverCrud(){
   this._router.navigate(['/circuitsCrud']);
 
 }
+
+/**
+ * @description Método empleado para cargar todos los datos del circuito a editar
+ */
 
   cargarCircuito(){
     this.serv_circuito.getCircuito(this.idCircuito).subscribe(
@@ -136,6 +153,10 @@ VolverCrud(){
     )
   }
 
+  /**
+   * @description Método empleado para cargar el formulario dependiendo de si es para editar o crear uno nuevo
+   */
+
   comprobarDatos(){
     if (this.idCircuito) {
      this.editarCircuito();
@@ -143,6 +164,10 @@ VolverCrud(){
       this.crearCircuito();
     }
   }
+
+  /**
+   * @description Método empleado para crear nuevo circuito
+   */
 
   crearCircuito(){
     let imagen = `${this.frm.value.imagen}`
@@ -225,6 +250,10 @@ VolverCrud(){
     )
   }
 
+  /**
+   * @description Metodo empleado para editar circuito
+   */
+
   editarCircuito(){
     let imagen = `${this.frm.value.imagen}`
     let imagen_trazado = `${this.frm.value.imagen_trazado}`
@@ -289,7 +318,6 @@ VolverCrud(){
       clearInterval(timerInterval);
     }
   }).then((result) => {
-    /* Read more about handling dismissals below */
     if (result.dismiss === Swal.DismissReason.timer) {
         this.frm.reset(); //Limpiar formulario
         this._router.navigate(['/circuitsCrud']) //Cargar el componente crud

@@ -5,12 +5,13 @@
     <title>Usuario</title>
 </head>
 <body>
-
+<!--If para averiguar el idioma establecido en la página-->
 @if (idioma == 'es') {
     <div class="container mt-5">
         <h1 class="text-center titulo">{{usuario.nombre}}</h1>
         <div class="row mt-5">
             <div class="col-md-6 text-center">
+                <!--If empleado para mostrar el casco de diferente color según los puntos que tenga el usuario (Según su rango)-->
                 @if (usuario.puntos! > 1000) {
                     <div class="row">
                         <div class="profile-img">
@@ -397,12 +398,13 @@
                     <strong class="texto">Podios:</strong> <strong class="valores">{{usuario.podios}}</strong></h1>
             </div>
         </div>
-        <!-- Información sobre las instalaciones -->
+        <!--If empleado para mostrar los mensajes, las opciones de editar cuenta y ir a la página torneos si es el perfil del propio usuario-->
         @if (isUser) {
             <div class="row mt-5">
                 <div class="col-md-12">
                         <div class="tabla text-center">
                             <table class="table align-middle">
+                                <!--If empleado para cambiar el titulo de la tabla dependiendo de si hay mensajes pendientes o no-->
                                 @if (aMensajesUsuario.length > 0) {
                                     <thead>
                                         <tr>
@@ -426,6 +428,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <!--For empleado para mostrar los mensajes pendientes-->
                                         @for (mensaje of aMensajesUsuario; track $index) {
                                             <tr class="cuerpoTabla">
                                                 <td>{{mensaje.cuerpo}}</td>
@@ -459,6 +462,7 @@
      <div class="row mt-5">
          <div class="col-md-12 botones">
             <button  class="btn btn-primary" (click)="modalComprobar()"><h2>Editar Cuenta</h2></button>
+            <!--If empleado para mostrar el botón torneos si hay de estos disponibles-->
             @if (torneosDisponibles) {
                 <button  class="btn btn-primary" (click)="torneos()"><h2>Torneos</h2></button>
             }
@@ -486,6 +490,7 @@
                     <div class="input-group">
                       <input type="password" class="form-control" formControlName="contraVieja" id="contraActual">
                       <span class="input-group-text" (click)="mostrarContra('contraActual')">
+                        <!--If empleado para mostrar mostrar o ocultar contraseña-->
                         @if (esVisible3 == false) {
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16" id="spanContra">
                             <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
@@ -500,6 +505,7 @@
                         }
                         </span>
                     </div>
+                    <!--If empleado para averiguar si el campo está relleno-->
                     @if (frm.get('contraVieja')?.errors?.['required']) {
                       <small class="text-danger font-italic">Dato Requerido</small>
                     }
@@ -521,6 +527,7 @@
                 <div class="form-outline mb-4">
                   <label class="form-label" for="form2Example11">Email</label>
                   <input type="email" class="form-control" formControlName="email"  aria-describedby="emailHelp" placeholder="juan@gmail.com" />
+                  <!--If empleado para averiguar si el campo es correcto-->
                    @if (frm.get('email')?.errors?.['email']) {
                     <small class="text-danger font-italic">Formato incorrecto</small>
                   }
@@ -528,6 +535,7 @@
                 <div class="form-outline mb-4">
                   <label class="form-label" for="form2Example11">Nombre</label>
                   <input type="text" class="form-control" formControlName="nombre" placeholder="Juan Perez"/>
+                    <!--If empleado para averiguar si el campo es correcto-->
                  @if (frm.get('nombre')?.errors?.['pattern']) {
                     <small class="text-danger font-italic">Formato incorrecto (No se permiten números y caracteres especiales)</small>
                   }
@@ -537,6 +545,7 @@
                   <div class="input-group">
                     <input type="password" class="form-control" formControlName="contra" id="contra">
                     <span class="input-group-text" (click)="mostrarContra('contra')">
+                    <!--If empleado para mostrar mostrar o ocultar contraseña-->
                       @if (esVisible == false) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16" id="spanContra">
                           <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
@@ -551,6 +560,7 @@
                       }
                       </span>
                   </div>
+                  <!--If empleado para averiguar si el campo es correcto-->
                   @if (frm.get('contra')?.errors?.['pattern']) {
                     <small class="text-danger font-italic">Formato incorrecto (de 8 a 16 carácteres, al menos una mayúscula, una minuscula, un número y un carácter especial)</small>
                   }
@@ -560,6 +570,7 @@
                   <div class="input-group">
                     <input type="password" class="form-control" formControlName="recontra" id="recontra">
                     <span class="input-group-text" (click)="mostrarContra('recontra')">
+                        <!--If empleado para mostrar mostrar o ocultar contraseña-->
                       @if (esVisible2 == false) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16" id="spanContra">
                           <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
@@ -574,6 +585,7 @@
                       }
                       </span>
                   </div>
+                  <!--If para averiguar si las contraseñas coinciden-->
                   @if (frm.get('recontra')?.errors?.['passwordIdem']) {
                     <small class="text-danger font-italic">Las contraseñas no coinciden</small>
                   }
@@ -590,9 +602,9 @@
 }@else {
     <div class="container mt-5">
         <h1 class="text-center titulo">{{usuario.nombre}}</h1>
-        <!-- Información general del circuito -->
         <div class="row mt-5">
             <div class="col-md-6 text-center">
+                <!--If empleado para mostrar el casco de diferente color según los puntos que tenga el usuario (Según su rango)-->
                 @if (usuario.puntos! > 1000) {
                     <div class="row">
                         <div class="profile-img">
@@ -979,11 +991,13 @@
                     <strong class="texto">Podiums:</strong> <strong class="valores">{{usuario.podios}}</strong></h1>
             </div>
         </div>
+         <!--If empleado para mostrar los mensajes, las opciones de editar cuenta y ir a la página torneos si es el perfil del propio usuario-->
         @if (isUser) {
             <div class="row mt-5">
                 <div class="col-md-12">
                         <div class="tabla text-center align-middle">
                             <table class="table align-middle">
+                                <!--If empleado para cambiar el titulo de la tabla dependiendo de si hay mensajes pendientes o no-->
                                 @if (aMensajesUsuario.length > 0) {
                                     <thead>
                                         <tr>
@@ -1007,6 +1021,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <!--For empleado para mostrar los mensajes pendientes-->
                                         @for (mensaje of aMensajesUsuario; track $index) {
                                             <tr class="cuerpoTabla">
                                                 <td>{{mensaje.cuerpo_en}}</td>
@@ -1040,6 +1055,7 @@
     <div class="row mt-5">
         <div class="col-md-12 botones">
            <button id="openModalBtn" class="btn btn-primary" (click)="modalComprobar()"><h2>Edit Account</h2></button>
+           <!--If empleado para mostrar el botón torneos si hay de estos disponibles-->
            @if (torneosDisponibles) {
             <button id="openModalBtn" class="btn btn-primary" (click)="torneos()"><h2>Tournaments</h2></button>
            }
@@ -1066,6 +1082,7 @@
                     <div class="input-group">
                       <input type="password" class="form-control" formControlName="contraVieja" id="contraActual">
                       <span class="input-group-text" (click)="mostrarContra('contraActual')">
+                        <!--If empleado para mostrar mostrar o ocultar contraseña-->
                         @if (esVisible3 == false) {
                           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16" id="spanContra">
                             <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
@@ -1080,6 +1097,7 @@
                         }
                         </span>
                     </div>
+                    <!--If empleado para averiguar si el campo está relleno-->
                     @if (frm.get('contraVieja')?.errors?.['required']) {
                       <small class="text-danger font-italic">Required Data</small>
                     }
@@ -1100,6 +1118,7 @@
                 <div class="form-outline mb-4">
                   <label class="form-label" for="form2Example11">Email</label>
                   <input type="email" class="form-control" formControlName="email"  aria-describedby="emailHelp" placeholder="juan@gmail.com" />
+                  <!--If empleado para averiguar si el campo está correcto-->
                   @if (frm.get('email')?.errors?.['email']) {
                     <small class="text-danger font-italic">Incorrect format</small>
                   }
@@ -1107,6 +1126,7 @@
                 <div class="form-outline mb-4">
                   <label class="form-label" for="form2Example11">Name</label>
                   <input type="text" class="form-control" formControlName="nombre" placeholder="Juan Perez"/>
+                    <!--If empleado para averiguar si el campo está correcto-->
                     @if (frm.get('nombre')?.errors?.['pattern']) {
                     <small class="text-danger font-italic">Incorrect format (Numbers and special characters are not allowed)</small>
                     }
@@ -1116,6 +1136,7 @@
                   <div class="input-group">
                     <input type="password" class="form-control" formControlName="contra" id="contra">
                     <span class="input-group-text" (click)="mostrarContra('contra')">
+                      <!--If empleado para mostrar mostrar o ocultar contraseña-->
                       @if (esVisible == false) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16" id="spanContra">
                           <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
@@ -1130,6 +1151,7 @@
                       }
                       </span>
                   </div>
+                   <!--If empleado para averiguar si el campo está correcto-->
                   @if (frm.get('contra')?.errors?.['pattern']) {
                     <small class="text-danger font-italic">Incorrect format</small>
                   }
@@ -1139,6 +1161,7 @@
                   <div class="input-group">
                     <input type="password" class="form-control" formControlName="recontra" id="recontra">
                     <span class="input-group-text" (click)="mostrarContra('recontra')">
+                      <!--If empleado para mostrar mostrar o ocultar contraseña-->
                       @if (esVisible2 == false) {
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16" id="spanContra">
                           <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
@@ -1153,6 +1176,7 @@
                       }
                       </span>
                   </div>
+                  <!--If empleado para comprobar que las contraseñas coinciden-->
                   @if (frm.get('recontra')?.errors?.['passwordIdem']) {
                     <small class="text-danger font-italic">Passwords do not match</small>
                   }

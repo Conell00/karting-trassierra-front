@@ -6,6 +6,7 @@
     <title>Preguntas Frecuente</title>
 </head>
 <body>
+    <!--If para averiguar el idioma establecido en la página-->
     @if (idioma == 'es') {
         <div class="container text-center my-5">
             <svg class="logo" width="150px" version="1.1" id="fi_416621" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
@@ -201,6 +202,7 @@
                     </div>
                 </div>
             </div>
+            <!--Switch empleado para poner el video de ayuda dependiendo del usuario que sea-->
             @switch (rol) {
                 @case (0) {
                     <h1 class="text-center titulo">Tutorial Visitante</h1>
@@ -417,6 +419,7 @@
                     </div>
                 </div>
             </div>
+             <!--Switch empleado para poner el video de ayuda dependiendo del usuario que sea-->
             @switch (rol) {
                 @case (0) {
                     <h1 class="text-center titulo">Visitor Tutorial</h1>

@@ -35,7 +35,7 @@ export class CircuitComponent implements OnInit {
   }
 
   /**
-   * Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
+   * @description Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
    * En caso de ya estar creada la cookie se establece la variable idioma según el valor de estar.
    */
 
@@ -47,7 +47,9 @@ export class CircuitComponent implements OnInit {
       this.idioma = this.cookies.get('idioma')
     }
   }
-
+  /**
+   * @description Método empleado para cargar el circuito
+   */
   cargarCircuito(){
     this.serv_circuito.getCircuito(this.idCircuito).subscribe(
       res=>{

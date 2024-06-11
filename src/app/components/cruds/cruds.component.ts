@@ -23,7 +23,7 @@ export class CrudsComponent implements OnInit {
   }
 
   /**
-   * Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
+   * @description Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
    * En caso de ya estar creada la cookie se establece la variable idioma según el valor de estar.
    */
 
@@ -36,16 +36,34 @@ export class CrudsComponent implements OnInit {
     }
   }
 
+  /**
+   * @description Método empleado para llevar al usuario al crud de circuitos
+   */
+
   circuitos(){
      this._router.navigate(['/circuitsCrud']);
   }
+  /**
+   * @description Método empleado para llevar al usuario al crud de usuarios
+   */
+
   usuarios(){
     this._router.navigate(['/usersCrud']);
   }
+
+  /**
+   * @description Método empleado para llevar al usuario al crud de torneos
+   */
+
   torneos(){
     this._router.navigate(['/toursCrud']);
 
   }
+
+  /**
+  * @description Método empleado para saber si el usuario que ha entrado es administrador o no.
+  * En caso de que sea administrador no se permitirá su acceso a esta página
+  */
 
   verificarUsuario(){
       this.serv_usuarios.getUsuarioId(parseInt(this.cookies.get('token'))).subscribe(

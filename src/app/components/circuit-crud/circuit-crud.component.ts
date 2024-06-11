@@ -28,7 +28,7 @@ export class CircuitCrudComponent implements OnInit {
   }
 
 /**
-   * Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
+   * @description Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
    * En caso de ya estar creada la cookie se establece la variable idioma según el valor de estar.
    */
 
@@ -40,6 +40,11 @@ idiomaEstablecido(){
     this.idioma = this.cookies.get('idioma')
   }
 }
+
+/**
+ * @description Método empleado para saber si el usuario que ha entrado es administrador o no.
+ * En caso de que sea administrador no se permitirá su acceso a esta página
+ */
 
   verificarUsuario(){
     this.serv_usuarios.getUsuarioId(parseInt(this.cookies.get('token'))).subscribe(
@@ -55,17 +60,35 @@ idiomaEstablecido(){
     )
 }
 
+/**
+ * @description Método empleado para llevar al formulario de circuitos para crear uno nuevo
+ */
+
   formularioCrear(){
     this._router.navigate(['/circuitForm']);
   }
+
+  /**
+   * @description Método empleado para volver a la página anterior
+   */
 
   volverMenu(){
     this._router.navigate(['/cruds']);
   }
 
+  /**
+   * @description Método empleado para llevar al formulario de circuitos para editar el circuito seleccionado
+   * @param id id del circuito a editar
+   */
+
   formularioEditar(id:number){
     this._router.navigate([`/circuitForm/${id}`]);
   }
+
+  /**
+   * @description Método empleado para eliminar el circuito seleccionado
+   * @param circuito id del circuito a eliminar
+   */
 
   eliminarCircuito(circuito:Circuito){
     if (this.idioma == 'es') {
@@ -153,10 +176,12 @@ idiomaEstablecido(){
     }
   }
 
+  /**
+   * @description Método empleado para cargar todos los circuitos
+   */
   cargarCircuitos(){
     this.serv_circuito.getCircuitos().subscribe(res=>{
        this.aCircuitos = res;
-       console.log(this.aCircuitos);
     })
   }
 }

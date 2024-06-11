@@ -48,8 +48,9 @@ export class ProfileComponent implements OnInit,OnDestroy {
   })
   this.cargarUsuario()
   }
+
   /**
-   * Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
+   * @description Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
    * En caso de ya estar creada la cookie se establece la variable idioma según el valor de estar.
    */
 
@@ -61,6 +62,9 @@ export class ProfileComponent implements OnInit,OnDestroy {
       this.idioma = this.cookies.get('idioma')
     }
   }
+  /**
+   * @description Método empleado para mostrar diferentes datos dependiendo de si visualizas otro perfil o tu perfil
+   */
   cargarUsuario(){
     if (this.cookies.check('token2')) {
       this.serv_usuarios.getUsuarioEmail(this.cookies.get('token2')).subscribe(res=>{
@@ -92,6 +96,12 @@ export class ProfileComponent implements OnInit,OnDestroy {
        })
     }
   }
+
+  /**
+   * @description Método empleado para borrar los mensajes una vez que han sido leídos
+   * @param id del mensaje a borrar
+   */
+
   mensajeLeido(id:number){
     this.serv_mensajes.deleteMensaje(id).subscribe(res=>{
       if (res) {
@@ -141,7 +151,6 @@ export class ProfileComponent implements OnInit,OnDestroy {
     clearInterval(timerInterval);
   }
 }).then((result) => {
-  /* Read more about handling dismissals below */
   if (result.dismiss === Swal.DismissReason.timer) {
     this.cargarUsuario()
   }
@@ -156,15 +165,28 @@ export class ProfileComponent implements OnInit,OnDestroy {
      })
   }
 
+  /**
+   * @description Método empleado para cargar datos del usuario en el modal de editar
+   */
+
   cargarModal(){
     this.frm.controls['nombre'].setValue(this.usuario.nombre);
     this.frm.controls['email'].setValue(this.usuario.email);
   }
 
+  /**
+   * @description Método empleado para mostrar el modal de validación
+   */
+
   modalComprobar(){
     let modal = document.getElementById("myModal")
     modal!.style.display = "block"
   }
+
+  /**
+   * @description Método empleado para averiguar si la contraseña que ha introducido el usuario es correcta o no.
+   * Si es correcta se abre el modal de editar, si no salta una alerta y se limpia el formulario.
+   */
 
   validarContra(){
     this.serv_usuarios.getUsuario(this.usuario.email,this.frm.value.contraVieja).subscribe(res=>{
@@ -193,7 +215,6 @@ export class ProfileComponent implements OnInit,OnDestroy {
       clearInterval(timerInterval);
     }
   }).then((result) => {
-    /* Read more about handling dismissals below */
     if (result.dismiss === Swal.DismissReason.timer) {
       this.frm.controls['contraVieja'].setValue('')
     }
@@ -218,7 +239,6 @@ export class ProfileComponent implements OnInit,OnDestroy {
       clearInterval(timerInterval);
     }
   }).then((result) => {
-    /* Read more about handling dismissals below */
     if (result.dismiss === Swal.DismissReason.timer) {
       this.frm.controls['contraVieja'].setValue('')
     }
@@ -227,7 +247,9 @@ export class ProfileComponent implements OnInit,OnDestroy {
       }
      })
   }
-
+  /**
+   * @description Método empleado para cerrar el modal de validación
+   */
   cerrarModalComprobar(){
     let modal = document.getElementById("myModal")
     modal!.style.display = "none"
@@ -236,7 +258,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
 
 
   /**
-   * Método empleado para abrir el modal si la contraseña es correcta
+   * @description Método empleado para abrir el modal si la contraseña es correcta
    */
 
   modalEditar(){
@@ -246,19 +268,30 @@ export class ProfileComponent implements OnInit,OnDestroy {
     modal!.style.display = "block"
     }
 
+    /**
+     * @description Método empleaodo para cerrar el modal de editar
+     */
+
   cerrarModal(){
     let modal = document.getElementById("myModal2")
     modal!.style.display = "none"
   }
+
+  /**
+   * @description Método empleado para dirigir al usuario a la página de torneos
+   */
+
   torneos(){
     this._router.navigate(['/tours']);
   }
-
+  /**
+   * @description Método empleado para dirigir al usuario a la página home
+   */
   volverAtras(){
     this._router.navigate(['/body']);
   }
 
-  //Getter para modal
+  //Getter para los modales
 
   get email(){
     return this.frm.get('email') as FormControl
@@ -276,7 +309,11 @@ export class ProfileComponent implements OnInit,OnDestroy {
     return this.frm.get('recontra') as FormControl
   }
 
-  //Método empleado para comprobar si la contraseña coincide
+  /**
+   * @description Método empleado para comprobar si la contraseña coincide
+   * @param control 
+   * @returns True si coindicen. False si no coinciden
+   */
 
   repetirContra(control:AbstractControl){
     if (this.frm) { //Verificar si frm está defenido antes de acceder a los controles.
@@ -289,7 +326,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
 
   /**
-   * Método empleado para mostrar las 3 contraseñas del modal por separado
+   * @description Método empleado para mostrar las 3 contraseñas del modal por separado
    * @param id contraseña a mostrar
    */
 
@@ -322,7 +359,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
 
   /**
-   * Método empleado para editar los datos del usuario (los datos provienen de la ventana modal).
+   * @description Método empleado para editar los datos del usuario (los datos provienen de la ventana modal).
    */
 
   editarUsuario(){
@@ -351,7 +388,6 @@ export class ProfileComponent implements OnInit,OnDestroy {
       clearInterval(timerInterval);
     }
   }).then((result) => {
-    /* Read more about handling dismissals below */
     if (result.dismiss === Swal.DismissReason.timer) {
       this.frm.controls['contraVieja'].setValue('')
       this.cargarUsuario()
@@ -377,7 +413,6 @@ export class ProfileComponent implements OnInit,OnDestroy {
       clearInterval(timerInterval);
     }
   }).then((result) => {
-    /* Read more about handling dismissals below */
     if (result.dismiss === Swal.DismissReason.timer) {
       this.frm.controls['contraVieja'].setValue('')
       this.cargarUsuario()
@@ -397,6 +432,10 @@ export class ProfileComponent implements OnInit,OnDestroy {
     this.frm.reset()
     this.cerrarModal()
   }
+
+  /**
+   * @description Método empleado para borrar el usuario
+   */
 
   eliminarUsuario(){
     if (this.idioma == 'es') {
@@ -475,7 +514,6 @@ export class ProfileComponent implements OnInit,OnDestroy {
         clearInterval(timerInterval);
       }
     }).then((result) => {
-      /* Read more about handling dismissals below */
       if (result.dismiss === Swal.DismissReason.timer) {
         this.cookies.delete('token')
         location.reload()
@@ -489,7 +527,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
 
 /**
- * Método empleado para si hay un campo en blanco, que conserve su valor original.
+ * @description Método empleado para si hay un campo en blanco, que conserve su valor original.
  */
 
   comprobarModal(){
@@ -505,7 +543,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
   }
 
   /**
-   * Método empleado para mostrar el botón 'torneos' si hay torneos disponibles.
+   * @description Método empleado para mostrar el botón 'torneos' si hay torneos disponibles.
    * @returns true o false, dependiendo si hay torneos disponibles.
    */
 

@@ -201,6 +201,50 @@ export class BodyComponent implements OnInit{
                            this.sumarVictoriaCarreras(resTorneo[iTorneo].nombre)
                            this.AsignarPuntosTorneo(resTorneo[iTorneo].nombre,resClasificacion.length)
                         }else{
+                          let timerInterval:number
+                          if (this.idioma == 'es') {
+                            Swal.fire({
+                              position: 'top-end',
+                              title: `Torneo ${this.nombreTorneo}  anulado por no llegar a los participantes mínimos`,
+                              imageUrl: '../../../assets/img/trofeo.png',
+                              timer: 1300,
+                              timerProgressBar: true,
+                              width: '500px',
+                              background: 'white',
+                              color:'red',
+                            didOpen: () => {
+                           Swal.showLoading();
+                          const timer = Swal.getPopup()!.querySelector("b");
+                          timerInterval = window.setInterval(() => {
+                      }, 100);
+                    },
+                    willClose: () => {
+                      clearInterval(timerInterval);
+                    }
+                  }).then((result) => {
+                  });
+                          }else{
+                            Swal.fire({
+                              position: 'top-end',
+                              title: `Tournament ${this.nombreTorneo}  canceled due to not reaching the minimum participants.`,
+                              imageUrl: '../../../assets/img/trofeo.png',
+                              timer: 1300,
+                              timerProgressBar: true,
+                              width: '500px',
+                              background: 'white',
+                              color:'red',
+                            didOpen: () => {
+                           Swal.showLoading();
+                          const timer = Swal.getPopup()!.querySelector("b");
+                          timerInterval = window.setInterval(() => {
+                      }, 100);
+                    },
+                    willClose: () => {
+                      clearInterval(timerInterval);
+                    }
+                  }).then((result) => {
+                  });
+                          }
                           for (let y = 0; y < resClasificacion.length; y++) {
                             const mensaje:Mensaje ={
                               id_participante: resClasificacion[y].id_participante,
@@ -232,7 +276,7 @@ export class BodyComponent implements OnInit{
     }
 
     /**
-     * Método empleado para cargar el mapa que va a contener los ganadores de las carreras del torneo
+     * @description Método empleado para cargar el mapa que va a contener los ganadores de las carreras del torneo
      * Introduzco la carrera ganada de cada partipante en un mapa
      * (hago esto porque si un participante gana más de una carrera, en la actualización solamente suma 1 por el tiempo de respuesta)
      */
@@ -247,7 +291,7 @@ export class BodyComponent implements OnInit{
     }
 
     /**
-     * Método empleado para actualizar las carreras ganadas de los participantes y para notificarlos de esto mismo
+     * @descriptionMétodo empleado para actualizar las carreras ganadas de los participantes y para notificarlos de esto mismo
      * @param torneo Nombre del torneo
      */
 

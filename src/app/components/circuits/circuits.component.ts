@@ -46,9 +46,13 @@ idiomaEstablecido(){
 cargarCircuitos(){
   this.serv_circuito.getCircuitos().subscribe(res=>{
      this.aCircuitos = res;
-     console.log(this.aCircuitos);
   })
 }
+
+/**
+ * @description Método empleado para pasar por url el id del torneo a mostrar
+ * @param id del circuito a mostrar en la siguiente página
+ */
 
 mostrarCircuito(id:number){
   this._router.navigate([`/circuito/${id}`]);

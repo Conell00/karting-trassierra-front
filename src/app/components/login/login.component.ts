@@ -17,7 +17,7 @@ export class LoginRegisterComponent implements OnInit {
   frm!:FormGroup
   esVisible:boolean = false;
   usuario!:Usuario
-  constructor(private fb:FormBuilder){} //se inyecta el servicio. Es una practica habitual de angular.
+  constructor(private fb:FormBuilder){}
   private serv_usuarios = inject(UsuarioService);
   private _router=inject(Router);
   private cookies = inject(CookieService)
@@ -39,6 +39,11 @@ export class LoginRegisterComponent implements OnInit {
     return this.frm.get('contra') as FormControl
   }
 
+   /**
+    * @description Método empleado para saber si se ha iniciado sesión o no.
+    * Si se ha iniciado sesión lleva para el menú de administración o al home, dependiendo si es administrador o participante
+    */
+
   existeToken(){
     if (this.cookies.check('token')) {
      this.serv_usuarios.getUsuarioId(parseInt(this.cookies.get('token'))).subscribe(res=>{
@@ -52,7 +57,7 @@ export class LoginRegisterComponent implements OnInit {
   }
 
   /**
-   * Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
+   * @description Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
    * En caso de ya estar creada la cookie se establece la variable idioma según el valor de estar.
    */
 
@@ -63,11 +68,10 @@ export class LoginRegisterComponent implements OnInit {
     }else{
       this.idioma = this.cookies.get('idioma')
     }
-    console.log(this.idioma);
   }
 
   /**
-   * Método empleado para comprobar si existe el usuario introducido.
+   * @description Método empleado para comprobar si existe el usuario introducido.
    * Si es así,se rederige a la pag principal.
    * Si no, salta un alerta avisando de que no existe el usuario introducido.
    */
@@ -135,7 +139,7 @@ export class LoginRegisterComponent implements OnInit {
   }
 
   /**
-   * Método empleado para redirigir al componente register
+   * @description Método empleado para redirigir al componente register
    */
 
   rederigirRegistrar(){
@@ -143,7 +147,7 @@ export class LoginRegisterComponent implements OnInit {
   }
 
   /**
-   * Método empleado para mostrar y ocultar la contraseña mediante el icono al lado del input
+   * @description Método empleado para mostrar y ocultar la contraseña mediante el icono al lado del input
    */
 
   mostrarContra(){

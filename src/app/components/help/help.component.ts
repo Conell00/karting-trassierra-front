@@ -20,7 +20,7 @@ export class HelpComponent implements OnInit {
   }
 
   /**
-   * Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
+   * @description Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
    * En caso de ya estar creada la cookie se establece la variable idioma según el valor de estar.
    */
 
@@ -34,7 +34,7 @@ export class HelpComponent implements OnInit {
   }
 
   /**
-   * Método empleado para saber el rol del usuario
+   * @description Método empleado para saber el rol del usuario
    */
 
   rolEstablecido(){
