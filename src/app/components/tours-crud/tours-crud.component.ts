@@ -71,7 +71,7 @@ idiomaEstablecido(){
   }
 
   formatoFecha(fecha:string){
-    return `${parseInt(fecha.slice(8,10))+1}/${fecha.slice(5,7)}/${fecha.slice(0,4)}`
+    return `${parseInt(fecha.slice(8,10))}/${fecha.slice(5,7)}/${fecha.slice(0,4)}`
   }
     /**
      * Método empleado para ajustar la hora a España (ya que la base de datos está alojada en europa del este

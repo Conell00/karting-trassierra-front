@@ -317,13 +317,24 @@ export class BodyComponent implements OnInit{
                 }
                 this.actUsuario = usuario
               }else{
-                const usuario:Usuario = {
-                  nombre:res.nombre,
-                  email:res.email,
-                  rol:res.rol,
-                  puntos: res.puntos + this.aClasificacionTorneo[i][1],
+                //If empleado para que un usuario no pueda bajar de 0 puntos
+                if ((res.puntos+this.aClasificacionTorneo[i][1])<-1) {
+                  const usuario:Usuario = {
+                    nombre:res.nombre,
+                    email:res.email,
+                    rol:res.rol,
+                    puntos:0,
+                  }
+                  this.actUsuario = usuario
+                }else{
+                  const usuario:Usuario = {
+                    nombre:res.nombre,
+                    email:res.email,
+                    rol:res.rol,
+                    puntos: res.puntos + this.aClasificacionTorneo[i][1],
+                  }
+                  this.actUsuario = usuario
                 }
-                this.actUsuario = usuario
               }
               //If para cambiar el mensaje dependiendo si se ha ganado o perdido puntos
               if (this.aClasificacionTorneo[i][1] > 0) {

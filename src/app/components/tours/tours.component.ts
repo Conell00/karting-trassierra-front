@@ -66,7 +66,7 @@ idiomaEstablecido(){
 
   Formatofecha(fecha:string){
     if (this.idioma == 'es') {
-      fecha = `${parseInt(fecha.slice(8,10))+1}/${fecha.slice(5,7)}/${fecha.slice(0,4)}`
+      fecha = `${parseInt(fecha.slice(8,10))}/${fecha.slice(5,7)}/${fecha.slice(0,4)}`
     }else{
       fecha = `${fecha.slice(0,4)}/${fecha.slice(5,7)}/${parseInt(fecha.slice(8,10))+1}`
     }
