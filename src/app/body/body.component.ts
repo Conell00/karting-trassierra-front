@@ -196,55 +196,11 @@ export class BodyComponent implements OnInit{
                         // If empleado para comprobar que el torneo contiene el número de participantes para poder disputarse.
                         // En caso de cumplirlo pasa a realizar todas las actualizaciones pertinentes, en caso de que no envia una alerta a los usuarios y se anula el torneo.
                         this.numParticipantes = resClasificacion.length
-                        console.log('participantes',resClasificacion.length);
                         if (resClasificacion.length > 4) {
-                           this.sumarVictoriaCarreras(resTorneo[iTorneo].nombre)
-                           this.AsignarPuntosTorneo(resTorneo[iTorneo].nombre,resClasificacion.length)
+                          this.marcarCarreras(resCarreras,resClasificacion.length,resTorneo[iTorneo].nombre)
+                          //  this.sumarVictoriaCarreras(resTorneo[iTorneo].nombre,resCarreras)
+                          //  this.AsignarPuntosTorneo(resTorneo[iTorneo].nombre,resClasificacion.length)
                         }else{
-                          let timerInterval:number
-                          if (this.idioma == 'es') {
-                            Swal.fire({
-                              position: 'top-end',
-                              title: `Torneo ${this.nombreTorneo}  anulado por no llegar a los participantes mínimos`,
-                              imageUrl: '../../../assets/img/trofeo.png',
-                              timer: 1300,
-                              timerProgressBar: true,
-                              width: '500px',
-                              background: 'white',
-                              color:'red',
-                            didOpen: () => {
-                           Swal.showLoading();
-                          const timer = Swal.getPopup()!.querySelector("b");
-                          timerInterval = window.setInterval(() => {
-                      }, 100);
-                    },
-                    willClose: () => {
-                      clearInterval(timerInterval);
-                    }
-                  }).then((result) => {
-                  });
-                          }else{
-                            Swal.fire({
-                              position: 'top-end',
-                              title: `Tournament ${this.nombreTorneo}  canceled due to not reaching the minimum participants.`,
-                              imageUrl: '../../../assets/img/trofeo.png',
-                              timer: 1300,
-                              timerProgressBar: true,
-                              width: '500px',
-                              background: 'white',
-                              color:'red',
-                            didOpen: () => {
-                           Swal.showLoading();
-                          const timer = Swal.getPopup()!.querySelector("b");
-                          timerInterval = window.setInterval(() => {
-                      }, 100);
-                    },
-                    willClose: () => {
-                      clearInterval(timerInterval);
-                    }
-                  }).then((result) => {
-                  });
-                          }
                           for (let y = 0; y < resClasificacion.length; y++) {
                             const mensaje:Mensaje ={
                               id_participante: resClasificacion[y].id_participante,
@@ -262,12 +218,12 @@ export class BodyComponent implements OnInit{
                               }
                             )
                           }
+                          this.marcarCarreras(resCarreras,resClasificacion.length,'')
                         }
                        }
                     }
                   })
                 }
-                this.marcarCarreras(resCarreras)
               }
             })
           }
@@ -296,6 +252,7 @@ export class BodyComponent implements OnInit{
      */
 
     sumarVictoriaCarreras(torneo:string){
+      console.log('Sumar victorias carreras');
       for (const [clave,valor] of this.aCarrerasGanadas.entries()) {
         this.serv_usuarios.getUsuarioId(clave).subscribe(res=>{
           if (res) {
@@ -308,7 +265,7 @@ export class BodyComponent implements OnInit{
             const mensaje:Mensaje ={
               id_participante: clave,
               cuerpo: `Felicidades, has ganado ${valor} carrera/s en el torneo ${torneo}`,
-              cuerpo_en: `Congratulations, you have won ${valor} race/s in the tournament ${torneo}` 
+              cuerpo_en: `Congratulations, you have won ${valor} race/s in the tournament ${torneo}`
             }
             this.servidorUsuario(usuario,mensaje,clave)
           }else{
@@ -319,6 +276,7 @@ export class BodyComponent implements OnInit{
           }
             })
       }
+      this.AsignarPuntosTorneo(torneo)
     }
 
     /**
@@ -326,7 +284,8 @@ export class BodyComponent implements OnInit{
      * @param torneo Nombre torneo
      */
 
-    AsignarPuntosTorneo(torneo:string,numeroParticipantes:number){
+    AsignarPuntosTorneo(torneo:string){
+      console.log('Asignar Puntos');
       for (let i = 0; i < this.aClasificacionTorneo.length; i++) {
         this.serv_usuarios.getUsuarioId(this.aClasificacionTorneo[i][0]).subscribe(res=>{
           if (res) {
@@ -434,7 +393,7 @@ export class BodyComponent implements OnInit{
      * @param carreras Objetos carreras (Las 3 carreras pertenecientes al torneo)
      */
 
-    marcarCarreras(carreras:getCarrera[]){
+    marcarCarreras(carreras:getCarrera[],participantes:number,torneo:string){
       for (let i = 0; i < carreras.length; i++) {
 
         const carrera:Carrera = {
@@ -444,98 +403,7 @@ export class BodyComponent implements OnInit{
         }
         this.serv_carrera.updateCarrera(carrera,carreras[i].id).subscribe(
           res=>{
-            if (res) {
-              let timerInterval:number
-              if (this.numParticipantes === undefined || this.numParticipantes > 4) {
-                          if (this.idioma == 'es') {
-                            Swal.fire({
-                              position: 'top-end',
-                              title: `Torneo ${this.nombreTorneo}  anulado por no llegar a los participantes mínimos`,
-                              imageUrl: '../../../assets/img/trofeo.png',
-                              timer: 1300,
-                              timerProgressBar: true,
-                              width: '500px',
-                              background: 'white',
-                              color:'red',
-                            didOpen: () => {
-                           Swal.showLoading();
-                          const timer = Swal.getPopup()!.querySelector("b");
-                          timerInterval = window.setInterval(() => {
-                      }, 100);
-                    },
-                    willClose: () => {
-                      clearInterval(timerInterval);
-                    }
-                  }).then((result) => {
-                  });
-                          }else{
-                            Swal.fire({
-                              position: 'top-end',
-                              title: `Tournament ${this.nombreTorneo}  canceled due to not reaching the minimum participants.`,
-                              imageUrl: '../../../assets/img/trofeo.png',
-                              timer: 1300,
-                              timerProgressBar: true,
-                              width: '500px',
-                              background: 'white',
-                              color:'red',
-                            didOpen: () => {
-                           Swal.showLoading();
-                          const timer = Swal.getPopup()!.querySelector("b");
-                          timerInterval = window.setInterval(() => {
-                      }, 100);
-                    },
-                    willClose: () => {
-                      clearInterval(timerInterval);
-                    }
-                  }).then((result) => {
-                  });
-                          }
-              }else{
-                if (this.idioma == 'es') {
-                  Swal.fire({
-                    position: 'top-end',
-                    title: `Torneo ${this.nombreTorneo} concluido`,
-                    imageUrl: '../../../assets/img/copa-trofeo.png',
-                    timer: 1300,
-                    timerProgressBar: true,
-                    width: '500px',
-                    background: 'white',
-                    color:'red',
-                  didOpen: () => {
-                 Swal.showLoading();
-                const timer = Swal.getPopup()!.querySelector("b");
-                timerInterval = window.setInterval(() => {
-            }, 100);
-          },
-          willClose: () => {
-            clearInterval(timerInterval);
-          }
-        }).then((result) => {
-        });
-                }else{
-                  Swal.fire({
-                    position: 'top-end',
-                    title: `Tournament ${this.nombreTorneo} concluded`,
-                    imageUrl: '../../../assets/img/copa-trofeo.png',
-                    timer: 1300,
-                    timerProgressBar: true,
-                    width: '500px',
-                    background: 'white',
-                    color:'red',
-                  didOpen: () => {
-                 Swal.showLoading();
-                const timer = Swal.getPopup()!.querySelector("b");
-                timerInterval = window.setInterval(() => {
-            }, 100);
-          },
-          willClose: () => {
-            clearInterval(timerInterval);
-          }
-        }).then((result) => {
-        });
-                }
-              }
-            }else{
+            if (!res) {
               Swal.fire({
                 title: "Ha habido algún error",
                 icon: "error"
@@ -544,6 +412,12 @@ export class BodyComponent implements OnInit{
           }
         )
       }
+      if (participantes > 4) {
+        this.sumarVictoriaCarreras(torneo)
+      }else{
+        console.log('se acabo');
+      }
+
     }
 
     /**
