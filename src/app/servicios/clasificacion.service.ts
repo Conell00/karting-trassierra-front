@@ -43,30 +43,6 @@ export class ClasificacionService {
     );
   }
 
-//    getCircuito(id:number):Observable<Circuito>{
-//      return this.http.get<Circuito>(`${this.url}circuito/${id}`).pipe(
-//        map(res=>{
-//         return res;
-//        }),
-//        catchError(error=>{
-//          console.log(`Error al obtener el cliente ${error}`);
-//          return of({} as Circuito);
-//        })
-//      );
-//    }
-
-//   getUsuarioEmail(email:string):Observable<Usuario>{
-//     return this.http.get<Usuario>(`${this.url}usuarioEmail/${email}`).pipe(
-//       map(res=>{
-//         return res;
-//       }),
-//       catchError(error=>{
-//         console.log(`Error al obtener al usuario ${error}`);
-//         return of({} as Usuario);
-//       })
-//     );
-//   }
-
   addClasificacion(clasificacion:Clasificacion):Observable<boolean>{
     return this.http.post<Clasificacion>(`${this.url}clasificacion`,clasificacion).pipe(
       map(res=>{

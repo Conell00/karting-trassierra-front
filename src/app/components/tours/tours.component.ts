@@ -26,8 +26,10 @@ export class ToursComponent implements OnInit {
   aTorneos:any[] = [];
   aCircuitos:any[] = [];
   aParticipacion:any[] = [];
+  aParticipantes:any[] = [];
   apuntar!:Clasificacion
   idioma!:string
+  contador:number = 0
   ngOnInit(): void {
     this.idiomaEstablecido()
     if (this.cookies.check('token')) {
@@ -57,10 +59,9 @@ idiomaEstablecido(){
       this.serv_torneo.getTorneosPorTerminar().subscribe(res=>{
          this.aTorneos = res;
          for (let i = 0; i < this.aTorneos.length; i++) {
-          this.cargarCircuitosTorneo(res[i].id, indice)
+            this.cargarCircuitosTorneo(res[i].id, indice)
           indice++;
          }
-         console.log(this.aTorneos);
       })
   }
 
@@ -79,12 +80,11 @@ idiomaEstablecido(){
 
   cargarCircuitosTorneo(id:number,indice:number){
     this.aCircuitos.push([])
-    this.serv_carrera.getCarrerasTorneo(id).subscribe(res=>{
-      for (let i = 0; i < 3; i++) {
-        this.Participacion(id,res[i].id, indice)
-        this.serv_circuito.getCircuito(res[i].id_circuito).subscribe(res=>{
-          this.aCircuitos[indice][i] = res
-          console.log('hello',this.aCircuitos);
+    this.serv_carrera.getCarrerasTorneo(id).subscribe(resCarrera=>{
+      for (let x = 0; x < 3; x++) {
+        this.Participacion(id,resCarrera[x].id, indice)
+        this.serv_circuito.getCircuito(resCarrera[x].id_circuito).subscribe(res=>{
+          this.aCircuitos[indice][x] = res
        })
        }
    })
@@ -134,7 +134,9 @@ idiomaEstablecido(){
       }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
+          this.aParticipantes = []
           this.cargarTorneos()
+          this.contador = 0
         }
       });
         }else{
@@ -159,7 +161,9 @@ idiomaEstablecido(){
 }).then((result) => {
   /* Read more about handling dismissals below */
   if (result.dismiss === Swal.DismissReason.timer) {
+    this.aParticipantes = []
     this.cargarTorneos()
+    this.contador = 0
   }
 });
         }
@@ -202,9 +206,10 @@ idiomaEstablecido(){
           clearInterval(timerInterval);
         }
       }).then((result) => {
-        /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
+          this.aParticipantes = []
           this.cargarTorneos()
+          this.contador = 0
         }
       });
         }else{
@@ -227,9 +232,10 @@ idiomaEstablecido(){
     clearInterval(timerInterval);
   }
 }).then((result) => {
-  /* Read more about handling dismissals below */
   if (result.dismiss === Swal.DismissReason.timer) {
+    this.aParticipantes = []
     this.cargarTorneos()
+    this.contador = 0
   }
 });
         }
