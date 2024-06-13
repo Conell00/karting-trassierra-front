@@ -40,7 +40,7 @@ export class ToursComponent implements OnInit {
   }
 
   /**
-   * Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
+   * @description Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
    * En caso de ya estar creada la cookie se establece la variable idioma según el valor de estar.
    */
 
@@ -52,6 +52,10 @@ idiomaEstablecido(){
     this.idioma = this.cookies.get('idioma')
   }
 }
+
+  /**
+   * @description Método empleado para cargar todos los torneos que no han ocurrido aún
+   */
 
   cargarTorneos(){
       this.aParticipacion = []
@@ -65,6 +69,12 @@ idiomaEstablecido(){
       })
   }
 
+  /**
+   * @description Método empleado para formatear la fecha dependiendo del idioma
+   * @param fecha Fecha procedente de la base de datos
+   * @returns Formato actualizado de fecha
+   */
+
   Formatofecha(fecha:string){
     if (this.idioma == 'es') {
       fecha = `${parseInt(fecha.slice(8,10))}/${fecha.slice(5,7)}/${fecha.slice(0,4)}`
@@ -74,9 +84,21 @@ idiomaEstablecido(){
     return  fecha
   }
 
+  /**
+   * @description Método empleado para formatear la hora
+   * @param hora Hora procedente de la base de datos
+   * @returns Formato actualizado de hora
+   */
+
   Formatohora(hora:string){
     return `${parseInt(hora.slice(0,2))+2}:${hora.slice(3,5)}`
   }
+
+  /**
+   * @description Método empleado para cargar los 3 circuitos en los que se vava disputar el torneo
+   * @param id Id del torneo
+   * @param indice 
+   */
 
   cargarCircuitosTorneo(id:number,indice:number){
     this.aCircuitos.push([])
@@ -89,6 +111,14 @@ idiomaEstablecido(){
        }
    })
   }
+
+  /**
+   * @description Método empleado para comprobar a que torneo esta inscrito el usuario.
+   * @param id Id torneo
+   * @param id_carrera Id Carrera
+   * @param indice 
+   */
+
   Participacion(id:number,id_carrera:number,indice:number){
     this.serv_clasificacion.getClasificacion(id_carrera,parseInt(this.cookies.get('token'))).subscribe(res=>{
       if (res) {
@@ -98,9 +128,21 @@ idiomaEstablecido(){
       }
    })
   }
+
+  /**
+   * @description Método empleado para guiar a la página del circuito cuando se clica sobre este.
+   * @param id Id circuito
+   */
+
   verCircuito(id:number){
     this._router.navigate([`/circuito/${id}`]);
   }
+
+  /**
+   * @description Método empleado para apuntarse a torneo
+   * @param id Id torneo
+   */
+
   apuntarseTorneo(id:number){
     this.serv_carrera.getCarrerasTorneo(id).subscribe(res=>{
       for (let i = 0; i < 3; i++) {
@@ -134,9 +176,7 @@ idiomaEstablecido(){
       }).then((result) => {
         /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
-          this.aParticipantes = []
           this.cargarTorneos()
-          this.contador = 0
         }
       });
         }else{
@@ -161,9 +201,7 @@ idiomaEstablecido(){
 }).then((result) => {
   /* Read more about handling dismissals below */
   if (result.dismiss === Swal.DismissReason.timer) {
-    this.aParticipantes = []
     this.cargarTorneos()
-    this.contador = 0
   }
 });
         }
@@ -177,8 +215,13 @@ idiomaEstablecido(){
         )
        }
    })
-  this.cargarTorneos();
   }
+
+  /**
+   * Método empleado para anular la participación a un torneo
+   * @param id Id torneo
+   */
+
   anularParticipacion(id:number){
     this.serv_carrera.getCarrerasTorneo(id).subscribe(res=>{
       for (let i = 0; i < 3; i++) {
@@ -207,9 +250,7 @@ idiomaEstablecido(){
         }
       }).then((result) => {
         if (result.dismiss === Swal.DismissReason.timer) {
-          this.aParticipantes = []
           this.cargarTorneos()
-          this.contador = 0
         }
       });
         }else{
@@ -244,6 +285,5 @@ idiomaEstablecido(){
 })
 }
 })
-  this.cargarTorneos();
 }
 }

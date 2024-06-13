@@ -56,7 +56,7 @@ export class BodyComponent implements OnInit{
   }
 
   /**
-   * Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
+   * @description Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
    * En caso de ya estar creada la cookie se establece la variable idioma según el valor de estar.
    */
 
@@ -69,7 +69,7 @@ export class BodyComponent implements OnInit{
     }
   }
   /**
-   * Método empleado para cargar el top 5 de usuarios de cada categoria
+   * @description Método empleado para cargar el top 5 de usuarios de cada categoria
    */
 
   usuariosTop(){
@@ -119,7 +119,7 @@ export class BodyComponent implements OnInit{
     }
 
     /**
-     * Método empleado para ir cambiando el top 5.
+     * @description Método empleado para ir cambiando el top 5.
      * @param numero Puede ser 1 o -1, dependiendo si se pulsa la flecha para la derecha o izquierda
      */
 
@@ -133,7 +133,7 @@ export class BodyComponent implements OnInit{
     }
 
     /**
-     * Método empleado para visualizar el perfil de un usuario cuando se clika sobre él
+     * @description Método empleado para visualizar el perfil de un usuario cuando se clika sobre él
      * @param email clave usuario
      */
 
@@ -143,7 +143,7 @@ export class BodyComponent implements OnInit{
     }
 
     /**
-     * Método empleado para redirigir a los torneos disponibles cuando se clicka sobre el banner
+     * @description Método empleado para redirigir a los torneos disponibles cuando se clicka sobre el banner
      */
 
     torneos(){
@@ -151,7 +151,7 @@ export class BodyComponent implements OnInit{
     }
 
     /**
-     * Método empleado para comprobar si hay torneos terminados, si los hay se simula este
+     * @description Método empleado para comprobar si hay torneos terminados, si los hay se simula este
      * añadiendo a los participantes sus correspondientes estadísticas y mandando los mensajes correspondientes a estos.
      */
 
@@ -198,8 +198,6 @@ export class BodyComponent implements OnInit{
                         this.numParticipantes = resClasificacion.length
                         if (resClasificacion.length > 4) {
                           this.marcarCarreras(resCarreras,resClasificacion.length,resTorneo[iTorneo].nombre)
-                          //  this.sumarVictoriaCarreras(resTorneo[iTorneo].nombre,resCarreras)
-                          //  this.AsignarPuntosTorneo(resTorneo[iTorneo].nombre,resClasificacion.length)
                         }else{
                           for (let y = 0; y < resClasificacion.length; y++) {
                             const mensaje:Mensaje ={
@@ -247,12 +245,11 @@ export class BodyComponent implements OnInit{
     }
 
     /**
-     * @descriptionMétodo empleado para actualizar las carreras ganadas de los participantes y para notificarlos de esto mismo
+     * @description Método empleado para actualizar las carreras ganadas de los participantes y para notificarlos de esto mismo
      * @param torneo Nombre del torneo
      */
 
     sumarVictoriaCarreras(torneo:string){
-      console.log('Sumar victorias carreras');
       for (const [clave,valor] of this.aCarrerasGanadas.entries()) {
         this.serv_usuarios.getUsuarioId(clave).subscribe(res=>{
           if (res) {
@@ -280,12 +277,11 @@ export class BodyComponent implements OnInit{
     }
 
     /**
-     * Método empleado par asignar puntos y torneo ganado a los usuarios participantes del torneo
+     * @description Método empleado par asignar puntos y torneo ganado a los usuarios participantes del torneo
      * @param torneo Nombre torneo
      */
 
     AsignarPuntosTorneo(torneo:string){
-      console.log('Asignar Puntos');
       for (let i = 0; i < this.aClasificacionTorneo.length; i++) {
         this.serv_usuarios.getUsuarioId(this.aClasificacionTorneo[i][0]).subscribe(res=>{
           if (res) {
@@ -372,7 +368,7 @@ export class BodyComponent implements OnInit{
     }
 
     /**
-     * Método empleado para evitar la repetición de código. En este se efectua la actualización del usuario y la creación de un nuevo mensaje.
+     * @description Método empleado para evitar la repetición de código. En este se efectua la actualización del usuario y la creación de un nuevo mensaje.
      * @param usuario Objeto usuario
      * @param mensaje Objeto mensaje
      * @param id Clave primeria de usuario
@@ -400,7 +396,7 @@ export class BodyComponent implements OnInit{
     }
 
     /**
-     * Método empleado para marcar como anotadas las carreras completadas del torneo
+     * @description Método empleado para marcar como anotadas las carreras completadas del torneo
      * @param carreras Objetos carreras (Las 3 carreras pertenecientes al torneo)
      */
 
@@ -425,14 +421,11 @@ export class BodyComponent implements OnInit{
       }
       if (participantes > 4) {
         this.sumarVictoriaCarreras(torneo)
-      }else{
-        console.log('se acabo');
       }
-
     }
 
     /**
-     * Método empleado para comprobar si hay torneos disponibles
+     * @description Método empleado para comprobar si hay torneos disponibles
      * y se ha iniciado sesión para acceder a la página de torneos.
      */
 
@@ -453,7 +446,7 @@ export class BodyComponent implements OnInit{
     }
 
     /**
-     * Método empleado para alertar al usuario si tiene algún mensaje pendiente
+     * @description Método empleado para alertar al usuario si tiene algún mensaje pendiente
      */
 
     mensajesUsuario(){

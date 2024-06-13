@@ -35,6 +35,8 @@ export class RegisterComponent implements OnInit {
     })
   }
 
+  //Getters del formuario
+
   get email(){
     return this.frm.get('email') as FormControl
   }
@@ -52,7 +54,7 @@ export class RegisterComponent implements OnInit {
   }
 
   /**
-   * Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
+   * @description Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
    * En caso de ya estar creada la cookie se establece la variable idioma según el valor de estar.
    */
 
@@ -63,7 +65,6 @@ export class RegisterComponent implements OnInit {
     }else{
       this.idioma = this.cookies.get('idioma')
     }
-    console.log(this.idioma);
   }
 
   /**
@@ -121,7 +122,6 @@ export class RegisterComponent implements OnInit {
           clearInterval(timerInterval);
         }
       }).then((result) => {
-        /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
           this._router.navigate(['/login']);
         }
@@ -146,7 +146,6 @@ export class RegisterComponent implements OnInit {
           clearInterval(timerInterval);
         }
       }).then((result) => {
-        /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
           this._router.navigate(['/login']);
         }
@@ -189,7 +188,6 @@ export class RegisterComponent implements OnInit {
           clearInterval(timerInterval);
         }
       }).then((result) => {
-        /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
           this.frm.reset();
           this._router.navigate(['/login']);
@@ -215,7 +213,6 @@ export class RegisterComponent implements OnInit {
           clearInterval(timerInterval);
         }
       }).then((result) => {
-        /* Read more about handling dismissals below */
         if (result.dismiss === Swal.DismissReason.timer) {
           this.frm.reset();
           this._router.navigate(['/login']);

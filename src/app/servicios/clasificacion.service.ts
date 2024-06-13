@@ -13,14 +13,21 @@ export class ClasificacionService {
 
   private http=inject(HttpClient);
 
+  /** 
+   *  @returns Todas las clasificaciones
+  */
+
   getClasificaciones():Observable<getClasificacion[]>{
     return this.http.get<getClasificacion[]>(`${this.url}clasificaciones`).pipe(
       catchError(error=>{
-        console.log(`Error al obtener las posiciones`);
         return of([]);
       })
     );
   }
+
+  /**
+   *  @returns Clasificación de un usuario en una carrera
+  */
 
   getClasificacion(id_carrera:number,id_participante:number):Observable<getClasificacion>{
     return this.http.get<getClasificacion>(`${this.url}clasificacionCarreraParticipante/${id_carrera}/${id_participante}`).pipe(
@@ -28,20 +35,26 @@ export class ClasificacionService {
         return res;
       }),
       catchError(error=>{
-        console.log(`Error al obtener la clasificacion ${error}`);
         return of({} as getClasificacion);
       })
     );
   }
 
+  /** 
+   *  @returns Todas las clasificaciones de una carrera
+  */
+
   getClasificacionCarrera(id_carrera:number):Observable<getClasificacion[]>{
     return this.http.get<getClasificacion[]>(`${this.url}clasificacionCarrera/${id_carrera}`).pipe(
       catchError(error=>{
-        console.log(`Error al obtener los usurios`);
         return of([]);
       })
     );
   }
+
+   /**
+   * @returns True si la clasificación ha sido editado. False si ha ocurrido algún problema
+   */
 
   addClasificacion(clasificacion:Clasificacion):Observable<boolean>{
     return this.http.post<Clasificacion>(`${this.url}clasificacion`,clasificacion).pipe(
@@ -49,47 +62,23 @@ export class ClasificacionService {
         return true;
       }),
       catchError(error=>{
-        console.log(`Error al apuntarse a torneo ${error}`);
         return of(false);
       })
     );
   }
+
+   /**
+   * @returns True si la clasificación ha sido borrada. False si ha ocurrido algún problema
+   */
 
   deleteClasificacion(id:number):Observable<boolean>{
     return this.http.delete(`${this.url}clasificacion/${id}`).pipe(
       map(()=>true),
       catchError(error=>{
-        console.log(`Error al anular la participación ${error}`);
         return of(false);
       })
     );
   }
-
-// getCliente(id:number):Observable<Cliente>{
-//     return this.http.get<Cliente>(`${this.url}clientes/${id}`).pipe(
-//       map(res=>{
-//         return res;
-//       }),
-//       catchError(error=>{
-//         console.log(`Error al obtener el cliente ${error}`);
-//         return of({} as Cliente);
-//       })
-//     );
-//   }
-
-
-
-//   updateCircuito(circuito:Circuito, id:number):Observable<boolean>{
-//     return this.http.patch<Circuito>(`${this.url}circuito/${id}`, circuito).pipe(
-//       map(res=>{
-//         return true;
-//       }),
-//       catchError(error=>{
-//         console.log(`Error al actualizar el circuito ${error}`);
-//         return of(false);
-//       })
-//     );
-//   }
 
   constructor() { }
 }

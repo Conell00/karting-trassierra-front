@@ -1,8 +1,11 @@
 <section class="light">
 	<div class="container py-4">
+		<!--If para averiguar el idioma establecido en la página-->
 		@if (idioma == 'es') {
 			<h1 class="titulo">Torneos Karting Trassierra</h1>
+			<!--For empleado para recorrer los torneos-->
 			@for (torneo of aTorneos; track $index) {
+				<!--If empelado para cambiar la tarjeta del torneo -->
 				@if ($index % 2 == 0) {
 					<article class="postcard dark red">
 						<a class="postcard__img_link" href="#">
@@ -99,6 +102,7 @@
 								  </svg>
 								  {{aCircuitos[$index][2].nombre}}
 								</li>
+								<!--If empleado para mostrar un botón o otro dependiendo de si se está apuntado o no al torneo-->
 								@if (aParticipacion[$index] == 0) {
 									<li class="tag__item play blue" (click)="apuntarseTorneo(torneo.id)">
 										<a><i class="fas fa-play mr-2"></i> Apuntarse</a>
@@ -115,7 +119,9 @@
 			}
 		}@else {
 			<h1 class="titulo">Trassierra Karting Tournaments</h1>
+			<!--For empleado para recorrer los torneos-->
 			@for (torneo of aTorneos; track $index) {
+				<!--If empelado para cambiar la tarjeta del torneo -->
 				@if ($index % 2 == 0) {
 					<article class="postcard dark red">
 						<a class="postcard__img_link" href="#">
@@ -212,6 +218,7 @@
 								  </svg>
 								  {{aCircuitos[$index][2].nombre}}
 								</li>
+								<!--If empleado para mostrar un botón o otro dependiendo de si se está apuntado o no al torneo-->
 								@if (aParticipacion[$index] == 0) {
 									<li class="tag__item play blue" (click)="apuntarseTorneo(torneo.id)">
 										<a><i class="fas fa-play mr-2"></i> Sign up</a>

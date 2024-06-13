@@ -13,6 +13,10 @@ export class UsuarioService {
 
   private http=inject(HttpClient);
 
+  /**
+   *  @returns Todas los usuarios
+  */
+
   getUsuarios():Observable<Usuario[]>{
     return this.http.get<Usuario[]>(`${this.url}usuarios`).pipe(
       catchError(error=>{
@@ -21,6 +25,10 @@ export class UsuarioService {
       })
     );
   }
+
+  /**
+   *  @returns Usuario por email y contra
+  */
 
   getUsuario(email:string,contra:string):Observable<Usuario>{
     return this.http.get<Usuario>(`${this.url}usuario/${email}/${contra}`).pipe(
@@ -34,6 +42,10 @@ export class UsuarioService {
     );
   }
 
+  /**
+   *  @returns Usuario por id
+  */
+
   getUsuarioId(id:number):Observable<getUsuario>{
     return this.http.get<getUsuario>(`${this.url}usuario/${id}`).pipe(
       map(res=>{
@@ -45,6 +57,10 @@ export class UsuarioService {
       })
     );
   }
+
+  /**
+   *  @returns Usuario por email
+  */
 
   getUsuarioEmail(email:string):Observable<Usuario>{
     return this.http.get<Usuario>(`${this.url}usuarioEmail/${email}`).pipe(
@@ -58,6 +74,10 @@ export class UsuarioService {
     );
   }
 
+  /**
+   *  @returns Usuario por rol
+  */
+
   getUsuariosRol(rol:string):Observable<Usuario[]>{
     return this.http.get<Usuario[]>(`${this.url}usuarios/${rol}`).pipe(
       catchError(error=>{
@@ -66,6 +86,10 @@ export class UsuarioService {
       })
     );
   }
+
+  /**
+   *  @returns Top 5 usuarios ordenador por puntos
+  */
 
   getUsuariosPoints():Observable<Usuario[]>{
     return this.http.get<Usuario[]>(`${this.url}usuariosPoints`).pipe(
@@ -76,6 +100,10 @@ export class UsuarioService {
     );
   }
 
+  /**
+   *  @returns Top 5 usuarios ordenador por torneos
+  */
+
   getUsuariosTours():Observable<Usuario[]>{
     return this.http.get<Usuario[]>(`${this.url}usuariosTours`).pipe(
       catchError(error=>{
@@ -84,6 +112,10 @@ export class UsuarioService {
       })
     );
   }
+
+  /**
+   *  @returns Top 5 usuarios ordenador por carreras
+  */
 
   getUsuariosRaces():Observable<Usuario[]>{
     return this.http.get<Usuario[]>(`${this.url}usuariosRaces`).pipe(
@@ -94,6 +126,10 @@ export class UsuarioService {
     );
   }
 
+  /**
+   *  @returns Top 5 usuarios ordenador por podios
+  */
+
   getUsuariosPodiums():Observable<Usuario[]>{
     return this.http.get<Usuario[]>(`${this.url}usuariosPodiums`).pipe(
       catchError(error=>{
@@ -102,6 +138,10 @@ export class UsuarioService {
       })
     );
   }
+
+  /**
+   * @returns True si el usuario ha sido creado. False si ha ocurrido algún problema
+   */
 
   addUsuario(usuario:Usuario):Observable<boolean>{
     return this.http.post<Usuario>(`${this.url}usuario`,usuario).pipe(
@@ -115,6 +155,10 @@ export class UsuarioService {
     );
   }
 
+  /**
+   * @returns True si el usuario ha sido borrado. False si ha ocurrido algún problema
+   */
+
   deleteUsuario(id:number):Observable<boolean>{
     return this.http.delete(`${this.url}usuario/${id}`).pipe(
       map(()=>true),
@@ -124,6 +168,10 @@ export class UsuarioService {
       })
     );
   }
+
+  /**
+   * @returns True si el usuario ha sido editado. False si ha ocurrido algún problema
+   */
 
   updateUsuario(usuario:Usuario,id:number):Observable<boolean>{
     return this.http.patch<Usuario>(`${this.url}usuario/${id}`,usuario).pipe(

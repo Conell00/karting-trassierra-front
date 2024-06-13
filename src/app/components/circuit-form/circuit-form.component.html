@@ -8,7 +8,7 @@
 <body>
   <div class="container">
     <div class="atras">
-      <svg id="fi_5791165" (click)="VolverCrud()" height="40" viewBox="0 0 512 512" width="40" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"><path d="m125 0h262c68.848 0 125 56.152 125 125v262c0 68.848-56.152 125-125 125h-262c-68.848 0-125-56.152-125-125v-262c0-68.848 56.152-125 125-125zm77.255 403.209 31.136-31.165-48.017-48.044h118.372a107.358 107.358 0 0 0 107.261-107.233v-.743a107.358 107.358 0 0 0 -107.261-107.232h-171.589v44.075h171.589a63.239 63.239 0 0 1 63.185 63.157v.743a63.239 63.239 0 0 1 -63.185 63.156h-118.372l48.017-48.017-31.136-31.164-101.262 101.233z" fill="#ef314c" fill-rule="evenodd"></path></svg>
+      <svg style="cursor: pointer;" id="fi_5791165" (click)="VolverCrud()" height="40" viewBox="0 0 512 512" width="40" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"><path d="m125 0h262c68.848 0 125 56.152 125 125v262c0 68.848-56.152 125-125 125h-262c-68.848 0-125-56.152-125-125v-262c0-68.848 56.152-125 125-125zm77.255 403.209 31.136-31.165-48.017-48.044h118.372a107.358 107.358 0 0 0 107.261-107.233v-.743a107.358 107.358 0 0 0 -107.261-107.232h-171.589v44.075h171.589a63.239 63.239 0 0 1 63.185 63.157v.743a63.239 63.239 0 0 1 -63.185 63.156h-118.372l48.017-48.017-31.136-31.164-101.262 101.233z" fill="#ef314c" fill-rule="evenodd"></path></svg>
     </div>
     @if (idioma == 'es') {
       <h1 class="mt-5 text-center titulo">Formulario de Circuito</h1>
@@ -28,8 +28,8 @@
           }
       </div>
       <div class="mb-3">
-        <label for="localización" class="form-label">Distancia</label>
-        <input type="number" class="form-control" formControlName="distancia" placeholder="Ingrese distancia circuito">
+        <label for="localización" class="form-label">Distancia (No puede ser inferior a 0)</label>
+        <input min="0" type="number" class="form-control" formControlName="distancia" placeholder="Ingrese distancia circuito">
         @if (frm.get('distancia')?.errors?.['required'] && distancia.dirty) {
             <small class="text-danger font-italic">Dato requerido</small>
           }
@@ -88,10 +88,10 @@
           }
       </div>
       <div class="mb-3">
-        <label for="localización" class="form-label">Distance</label>
-        <input type="number" class="form-control" formControlName="distancia" placeholder="Enter circuit distance">
+        <label for="localización" class="form-label">Distance (Cannot be less than 0)</label>
+        <input min="0" type="number" class="form-control" formControlName="distancia" placeholder="Enter circuit distance">
         @if (frm.get('distancia')?.errors?.['required'] && distancia.dirty) {
-            <small class="text-danger font-italic">Dato requerido</small>
+            <small class="text-danger font-italic">Required Data</small>
           }
       </div>
       <div class="mb-3">

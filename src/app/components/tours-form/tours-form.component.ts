@@ -1,6 +1,6 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, ChildActivationEnd, Router } from '@angular/router';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { TorneoService } from '../../servicios/torneo.service';
 import Swal from 'sweetalert2';
 import { CircuitoService } from '../../servicios/circuito.service';
@@ -39,8 +39,8 @@ export class ToursFormComponent implements OnInit {
     this.idiomaEstablecido()
     this.frm= this.fb.group({
       nombre:['',[Validators.required]],
-      fecha:['',[Validators.required]],
-      hora:['',[Validators.required]],
+      fecha:['',[Validators.required,this.comprobarFecha.bind(this)]],
+      hora:['',[Validators.required,this.comprobarHora.bind(this)]],
       imagen:['',[Validators.required, Validators.pattern(/\.(png|jpg)$/i)]],
       descripcion:['',[Validators.required]],
       descripcion_en:['',[Validators.required]],
@@ -100,6 +100,43 @@ export class ToursFormComponent implements OnInit {
     return this.frm.get('descripcion_en') as FormControl
   }
 
+  /**
+   * @description Método empleado para comprobar que la hora es correcta
+   * @param control
+   * @returns true o false, dependiendo de si la hora está dentro del baremo establecido
+   */
+
+  comprobarHora(control:AbstractControl){
+    if (this.frm) { //Verificar si frm está defenido antes de acceder a los controles.
+      const hora = this.frm.get('hora')?.value;
+     return hora > '12:00' && hora < '20:01'?null : {passwordIdem:true}
+    }else{
+      return null
+    }
+  }
+
+  /**
+   * @description Método empleado para comprobar que la fecha es correcta
+   * @param control 
+   * @returns true o false, dependiendo de si la fecha no es inferior al día de hoy
+   */
+
+  comprobarFecha(control:AbstractControl){
+    if (this.frm) { //Verificar si frm está defenido antes de acceder a los controles.
+      const hoy = new Date()
+      const hoySoloFecha = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate())
+      const fecha = new Date(this.frm.get('fecha')?.value)
+     return fecha >= hoySoloFecha?null : {passwordIdem:true}
+    }else{
+      return null
+    }
+  }
+
+  /**
+ * @description Método empleado para saber si el usuario que ha entrado es administrador o no.
+ * En caso de que sea administrador no se permitirá su acceso a esta página
+ */
+
   verificarUsuario(){
     this.serv_usuario.getUsuarioId(parseInt(this.cookies.get('token'))).subscribe(
       res=>{
@@ -115,7 +152,7 @@ export class ToursFormComponent implements OnInit {
 }
 
 /**
-   * Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
+   * @description Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
    * En caso de ya estar creada la cookie se establece la variable idioma según el valor de estar.
    */
 
@@ -127,6 +164,9 @@ idiomaEstablecido(){
     this.idioma = this.cookies.get('idioma')
   }
 }
+/**
+ * @description Método empleado para cargar los datos del torneo a editar
+ */
 
   cargarTorneo(){
     this.serv_torneo.getTorneo(this.idTorneo).subscribe(
@@ -148,6 +188,10 @@ idiomaEstablecido(){
       }
     )
   }
+
+  /**
+   * @description Método empleado para cargar las carreras del torneo a editar
+   */
 
   cargarCarrerasTorneo(){
     this.serv_carrera.getCarrerasTorneo(this.idTorneo).subscribe(
@@ -171,12 +215,19 @@ idiomaEstablecido(){
     )
   }
 
+  /**
+   * @description Método empelado para cargar todos los circuitos. Para poder seleccionarlos en los select
+   */
+
   cargarCircuitos(){
     this.serv_circuito.getCircuitos().subscribe(res=>{
        this.aCircuitos = res;
-       console.log('Circuitos', this.aCircuitos);
     })
   }
+
+  /**
+   * @description Método empleado para saber si los datos del formulario son para editar o crear.
+   */
 
 
   comprobarDatos(){
@@ -193,9 +244,17 @@ idiomaEstablecido(){
     }
   }
 
+  /**
+   * @description Método empleado para volver hacía atrás
+   */
+
   VolverCrud(){
     this._router.navigate(['/toursCrud']);
   }
+
+  /**
+   * @description Método empleado para crear el torneo
+   */
 
   crearTorneo(){
     let imagen = `${this.frm.value.imagen}`
@@ -223,9 +282,12 @@ idiomaEstablecido(){
     )
   }
 
+  /**
+   * @description Método empleado para editar el torneo
+   */
+
   editarTorneo(){
     let imagen = `${this.frm.value.imagen}`
-    console.log('fecha', this.frm.value.fecha);
     imagen = imagen.slice(12)
     const torneo:Torneo ={
       nombre: this.frm.value.nombre,
@@ -249,12 +311,15 @@ idiomaEstablecido(){
     )
   }
 
+  /**
+   * @description Método empleado para crear las carreras del torneo a crear
+   */
+
   crearCarrerasTorneo(){
     this.serv_torneo.getTorneoNombre(this.frm.value.nombre).subscribe(
       res=>{
         if (res) {
          this.torneo.push(res)
-         console.log('hola', this.torneo);
           for (let i = 0; i < this.aCarreras.length; i++) {
             const carrera:Carrera = {
               id_torneo: this.torneo[0].id,
@@ -292,7 +357,6 @@ idiomaEstablecido(){
       clearInterval(timerInterval);
     }
   }).then((result) => {
-    /* Read more about handling dismissals below */
     if (result.dismiss === Swal.DismissReason.timer) {
         this.frm.reset(); //Limpiar formulario
         this._router.navigate(['/toursCrud']) //Cargar el componente crud
@@ -318,7 +382,6 @@ idiomaEstablecido(){
       clearInterval(timerInterval);
     }
   }).then((result) => {
-    /* Read more about handling dismissals below */
     if (result.dismiss === Swal.DismissReason.timer) {
         this.frm.reset(); //Limpiar formulario
         this._router.navigate(['/toursCrud']) //Cargar el componente crud
@@ -329,6 +392,10 @@ idiomaEstablecido(){
       }
     )
   }
+
+   /**
+   * @description Método empleado para editar las carreras del torneo a editar
+   */
 
   editarCarrerasTorneo(){
     for (let i = 0; i < this.aCarrerasTorneoId.length; i++) {
@@ -360,7 +427,6 @@ idiomaEstablecido(){
       clearInterval(timerInterval);
     }
   }).then((result) => {
-    /* Read more about handling dismissals below */
     if (result.dismiss === Swal.DismissReason.timer) {
         this.frm.reset(); //Limpiar formulario
         this._router.navigate(['/toursCrud']) //Cargar el componente crud
@@ -386,7 +452,6 @@ idiomaEstablecido(){
       clearInterval(timerInterval);
     }
   }).then((result) => {
-    /* Read more about handling dismissals below */
     if (result.dismiss === Swal.DismissReason.timer) {
         this.frm.reset(); //Limpiar formulario
         this._router.navigate(['/toursCrud']) //Cargar el componente crud

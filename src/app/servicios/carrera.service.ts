@@ -13,33 +13,44 @@ export class CarreraService {
 
   private http=inject(HttpClient);
 
+ /**
+   * @returns Todas las carreras
+   */
 
   getCarreras():Observable<Carrera[]>{
     return this.http.get<Carrera[]>(`${this.url}carreras`).pipe(
       catchError(error=>{
-        console.log(`Error al obtener las carreras`);
         return of([]);
       })
     );
   }
 
+  /**
+   *  @returns Todas las carreras de un torneo
+  */
   getCarrerasTorneo(id_torneo:number):Observable<getCarrera[]>{
     return this.http.get<getCarrera[]>(`${this.url}carrerasTorneo/${id_torneo}`).pipe(
       catchError(error=>{
-        console.log(`Error al obtener las carreras`);
         return of([]);
       })
     );
   }
+
+  /**
+   * @returns Todas las carreras terminadas
+   */
 
   getCarrerasAnotadas(id_torneo:number,anotado:number):Observable<getCarrera[]>{
     return this.http.get<getCarrera[]>(`${this.url}carrerasAnotada/${id_torneo}/${anotado}`).pipe(
       catchError(error=>{
-        console.log(`Error al obtener las carreras`);
         return of([]);
       })
     );
   }
+
+  /**
+   * @returns True si la carrera ha sido creada. False si ha ocurrido algún problema
+   */
 
 
   addCarrera(carrera:Carrera):Observable<boolean>{
@@ -48,12 +59,14 @@ export class CarreraService {
         return true;
       }),
       catchError(error=>{
-        console.log(`Error al obtener la carrera ${error}`);
         return of(false);
       })
     );
   }
 
+  /**
+   * @returns True si la carrera ha sido editada. False si ha ocurrido algún problema
+   */
 
   updateCarrera(carrera:Carrera, id:number):Observable<boolean>{
     return this.http.patch<Carrera>(`${this.url}carrera/${id}`,carrera).pipe(
@@ -61,7 +74,6 @@ export class CarreraService {
         return true;
       }),
       catchError(error=>{
-        console.log(`Error al actualizar la carrera ${error}`);
         return of(false);
       })
     );

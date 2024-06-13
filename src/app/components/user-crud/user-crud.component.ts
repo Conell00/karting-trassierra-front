@@ -39,7 +39,7 @@ export class UserCrudComponent {
   }
 
   /**
-   * Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
+   * @description Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
    * En caso de ya estar creada la cookie se establece la variable idioma según el valor de estar.
    */
 
@@ -64,7 +64,7 @@ get cuerpo_en(){
 }
 
 /**
- * Método empleado para verificar si el usuario que ha accedido es admin.
+ * @description Método empleado para verificar si el usuario que ha accedido es admin.
  * también cojo el id del usuario para evitar que el mismo se pueda enviar un mensaje
  */
 
@@ -83,17 +83,35 @@ get cuerpo_en(){
     )
 }
 
+  /**
+   * @description Método empleado para llevar al formulario usuarios para crear
+   */
+
   formularioCrear(){
     this._router.navigate(['/userForm']);
   }
+
+  /**
+   * @description Método empleado para volver hacía atrás
+   */
 
   volverMenu(){
     this._router.navigate(['/cruds']);
   }
 
+  /**
+   * @description Método empleado para llevar al formulario usuarios para editar
+   */
+
   formularioEditar(id:number){
     this._router.navigate([`/userForm/${id}`]);
   }
+
+  /**
+   * @description Método empleado para mostrar el rol según el idioma
+   * @param rol Rol procedente de la base de datos
+   * @returns Rol traducido
+   */
 
   traducirRol(rol:string){
     if (rol == 'participante') {
@@ -101,6 +119,11 @@ get cuerpo_en(){
     }
     return rol
   }
+
+  /**
+   * Método empleado para borrar el usuario seleccionado
+   * @param usuario Id usuario
+   */
 
   eliminarUsuario(usuario:Usuario){
     if (this.idioma == 'es') {
@@ -135,7 +158,6 @@ get cuerpo_en(){
         clearInterval(timerInterval);
       }
     }).then((result) => {
-      /* Read more about handling dismissals below */
       if (result.dismiss === Swal.DismissReason.timer) {
         this.cargarUsuarios()
       }
@@ -176,7 +198,6 @@ get cuerpo_en(){
         clearInterval(timerInterval);
       }
     }).then((result) => {
-      /* Read more about handling dismissals below */
       if (result.dismiss === Swal.DismissReason.timer) {
         this.cargarUsuarios()
       }
@@ -189,7 +210,7 @@ get cuerpo_en(){
   }
 
   /**
-   * Método empleado para cargar los usuarios.
+   * @description Método empleado para cargar los usuarios.
    */
 
   cargarUsuarios(){
@@ -200,7 +221,7 @@ get cuerpo_en(){
   }
 
   /**
-   * Método empleado para abrir el modal de enviar mensaje
+   * @description Método empleado para abrir el modal de enviar mensaje
    * @param id de receptor de mensaje
    */
 
@@ -212,7 +233,7 @@ get cuerpo_en(){
   }
 
   /**
-   * Método empleado para cerrar modal
+   * @description Método empleado para cerrar modal
    */
 
   cerrarModalMensaje(){
@@ -222,7 +243,7 @@ get cuerpo_en(){
   }
 
 /**
- * Método empleado para enviar el mensaje al usuario
+ * @description Método empleado para enviar el mensaje al usuario
  */
   enviarMensaje(){
     const mensaje:Mensaje ={
@@ -253,7 +274,6 @@ get cuerpo_en(){
     clearInterval(timerInterval);
   }
 }).then((result) => {
-  /* Read more about handling dismissals below */
   if (result.dismiss === Swal.DismissReason.timer) {
     this.cerrarModalMensaje()
   }
@@ -278,7 +298,6 @@ get cuerpo_en(){
     clearInterval(timerInterval);
   }
 }).then((result) => {
-  /* Read more about handling dismissals below */
   if (result.dismiss === Swal.DismissReason.timer) {
     this.cerrarModalMensaje()
   }

@@ -16,7 +16,7 @@ export class TermsComponent implements OnInit {
     this.idiomaEstablecido()
   }
   /**
-   * Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
+   * @description Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
    * En caso de ya estar creada la cookie se establece la variable idioma según el valor de estar.
    */
 

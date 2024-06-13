@@ -8,16 +8,19 @@
 <body>
   <div class="container">
     <div class="atras">
-      <svg id="fi_5791165" (click)="VolverCrud()" height="40" viewBox="0 0 512 512" width="40" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"><path d="m125 0h262c68.848 0 125 56.152 125 125v262c0 68.848-56.152 125-125 125h-262c-68.848 0-125-56.152-125-125v-262c0-68.848 56.152-125 125-125zm77.255 403.209 31.136-31.165-48.017-48.044h118.372a107.358 107.358 0 0 0 107.261-107.233v-.743a107.358 107.358 0 0 0 -107.261-107.232h-171.589v44.075h171.589a63.239 63.239 0 0 1 63.185 63.157v.743a63.239 63.239 0 0 1 -63.185 63.156h-118.372l48.017-48.017-31.136-31.164-101.262 101.233z" fill="#ef314c" fill-rule="evenodd"></path></svg>
+      <svg style="cursor: pointer;" id="fi_5791165" (click)="VolverCrud()" height="40" viewBox="0 0 512 512" width="40" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1"><path d="m125 0h262c68.848 0 125 56.152 125 125v262c0 68.848-56.152 125-125 125h-262c-68.848 0-125-56.152-125-125v-262c0-68.848 56.152-125 125-125zm77.255 403.209 31.136-31.165-48.017-48.044h118.372a107.358 107.358 0 0 0 107.261-107.233v-.743a107.358 107.358 0 0 0 -107.261-107.232h-171.589v44.075h171.589a63.239 63.239 0 0 1 63.185 63.157v.743a63.239 63.239 0 0 1 -63.185 63.156h-118.372l48.017-48.017-31.136-31.164-101.262 101.233z" fill="#ef314c" fill-rule="evenodd"></path></svg>
     </div>
+    <!--If para averiguar el idioma establecido en la página-->
     @if (idioma =='es') {
       <h1 class="mt-5 text-center titulo">Formulario de Usuario</h1>
     <form [formGroup]="frm" (submit)="comprobarDatos()" autocomplete="off">
       <div class="mb-3">
         <label for="nombre" class="form-label">Nombre</label>
         <input type="text" class="form-control" formControlName="nombre" placeholder="Ingrese el nombre del usuario">
+        <!--If para saber si el campo está relleno-->
         @if (frm.get('nombre')?.errors?.['required'] && nombre.dirty) {
             <small class="text-danger font-italic">Dato requerido</small>
+          <!--If para saber si el campo está correcto-->
           }@else if (frm.get('nombre')?.errors?.['pattern']) {
             <small class="text-danger font-italic">Formato incorrecto (No se permiten números y caracteres especiales)</small>
           }
@@ -25,16 +28,20 @@
       <div class="mb-3">
         <label for="localización" class="form-label">Email</label>
         <input type="text" class="form-control" formControlName="email" placeholder="Ingrese localización circuito">
-          @if (frm.get('email')?.errors?.['required'] && email.dirty) {
+          <!--If para saber si el campo está relleno-->
+        @if (frm.get('email')?.errors?.['required'] && email.dirty) {
             <small class="text-danger font-italic">Dato requerido</small>
+          <!--If para saber si el campo está correcto-->
           }@else if (frm.get('email')?.errors?.['email']) {
             <small class="text-danger font-italic">Formato incorrecto</small>
           }
       </div>
+      <!--If empleado para saber si el campo tiene que ser requerido o no. Dependiendo de si es para crear o editar-->
       @if (idUsuario) {
         <div class="mb-3">
-          <label for="localización" class="form-label">Contraseña(Introduce si quieres cambiarla, si no deja vacio)</label>
+          <label for="localización" class="form-label">Contraseña (Introduce si quieres cambiarla, si no deja vacio)</label>
           <input type="text" class="form-control" formControlName="contra" placeholder="Ingrese contraseña del usuario">
+          <!--If para saber si el campo está correcto-->
           @if (frm.get('contra')?.errors?.['pattern']) {
               <small class="text-danger font-italic">Formato incorrecto (de 8 a 16 carácteres, al menos una mayúscula, una minuscula, un número y un carácter especial)</small>
             }
@@ -43,8 +50,10 @@
         <div class="mb-3">
           <label for="localización" class="form-label">Contraseña</label>
           <input type="text" class="form-control" formControlName="contra" placeholder="Ingrese contraseña del usuario">
+          <!--If para saber si el campo está relleno-->
           @if (frm.get('contra')?.errors?.['required'] && contra.dirty) {
             <small class="text-danger font-italic">Dato requerido</small>
+          <!--If para saber si el campo está correcto-->
           }@else if (frm.get('contra')?.errors?.['pattern']) {
             <small class="text-danger font-italic">Formato incorrecto (de 8 a 16 carácteres, al menos una mayúscula, una minuscula, un número y un carácter especial)</small>
           }
@@ -57,35 +66,41 @@
             <option value="participante">Participante</option>
             <option value="admin">Administrador</option>
           </select>
-        @if (frm.get('rol')?.errors?.['required'] && rol.dirty) {
+            <!--If para saber si el campo está relleno-->
+          @if (frm.get('rol')?.errors?.['required'] && rol.dirty) {
             <small class="text-danger font-italic">Dato requerido</small>
         }
       </div>
+      <!--If empleado para saber si mostrar las carácteristicas. Dependiendo de si es para crear o editar-->
         @if (idUsuario != null) {
             <div class="mb-3">
-                <label for="localización" class="form-label">Puntos</label>
-                <input type="number" class="form-control" formControlName="puntos" placeholder="Ingrese los puntos del usuario">
+                <label for="localización" class="form-label">Puntos (No puede ser inferior a 0)</label>
+                <input min="0" type="number" class="form-control" formControlName="puntos" placeholder="Ingrese los puntos del usuario">
+                <!--If para saber si el campo está relleno-->
                 @if (frm.get('puntos')?.errors?.['required'] && puntos.dirty) {
                     <small class="text-danger font-italic">Dato requerido</small>
                   }
               </div>
               <div class="mb-3">
-                <label for="localización" class="form-label">Torneos ganados</label>
-                <input type="number" class="form-control" formControlName="torneos_ganados" placeholder="Ingrese los torneos ganados del usuario">
+                <label for="localización" class="form-label">Torneos ganados (No puede ser inferior a 0)</label>
+                <input min="0" type="number" class="form-control" formControlName="torneos_ganados" placeholder="Ingrese los torneos ganados del usuario">
+                <!--If para saber si el campo está relleno-->
                 @if (frm.get('torneos_ganados')?.errors?.['required'] && torneos_ganados.dirty) {
                     <small class="text-danger font-italic">Dato requerido</small>
                   }
               </div>
               <div class="mb-3">
-                <label for="localización" class="form-label">Carreras ganadas</label>
-                <input type="number" class="form-control" formControlName="carreras_ganadas" placeholder="Ingrese las carreras ganadas del usuario">
+                <label for="localización" class="form-label">Carreras ganadas (No puede ser inferior a 0)</label>
+                <input min="0" type="number" class="form-control" formControlName="carreras_ganadas" placeholder="Ingrese las carreras ganadas del usuario">
+                <!--If para saber si el campo está relleno-->
                 @if (frm.get('carreras_ganadas')?.errors?.['required'] && carreras_ganadas.dirty) {
                     <small class="text-danger font-italic">Dato requerido</small>
                   }
               </div>
               <div class="mb-3">
-                <label for="localización" class="form-label">Podios</label>
-                <input type="number" class="form-control" formControlName="podios" placeholder="Ingrese los podios del usuario" value="0">
+                <label for="localización" class="form-label">Podios (No puede ser inferior a 0)</label>
+                <input min="0" type="number" class="form-control" formControlName="podios" placeholder="Ingrese los podios del usuario" value="0">
+                <!--If para saber si el campo está relleno-->
                 @if (frm.get('podios')?.errors?.['required'] && podios.dirty) {
                     <small class="text-danger font-italic">Dato requerido</small>
                   }
@@ -99,8 +114,10 @@
       <div class="mb-3">
         <label for="nombre" class="form-label">Name</label>
         <input type="text" class="form-control" formControlName="nombre" placeholder="Enter the username">
+        <!--If para saber si el campo está relleno-->
         @if (frm.get('nombre')?.errors?.['required'] && nombre.dirty) {
             <small class="text-danger font-italic">Required Data</small>
+          <!--If para saber si el campo está correcto-->
           }@else if (frm.get('nombre')?.errors?.['pattern']) {
             <small class="text-danger font-italic">Incorrect format (Numbers and special characters are not allowed)</small>
           }
@@ -108,16 +125,20 @@
       <div class="mb-3">
         <label for="localización" class="form-label">Email</label>
         <input type="text" class="form-control" formControlName="email" placeholder="Enter circuit location">
-          @if (frm.get('email')?.errors?.['required'] && email.dirty) {
+          <!--If para saber si el campo está relleno-->
+        @if (frm.get('email')?.errors?.['required'] && email.dirty) {
             <small class="text-danger font-italic">Required Data</small>
+          <!--If para saber si el campo está correcto-->
           }@else if (frm.get('email')?.errors?.['email']) {
             <small class="text-danger font-italic">Incorrect Format</small>
           }
       </div>
+      <!--If empleado para saber si el campo tiene que ser requerido o no. Dependiendo de si es para crear o editar-->
       @if (idUsuario) {
         <div class="mb-3">
           <label for="localización" class="form-label">Password (Enter if you want to change it, otherwise leave empty)</label>
           <input type="text" class="form-control" formControlName="contra" placeholder="Ingrese contraseña del usuario">
+          <!--If para saber si el campo está correcto-->
           @if (frm.get('contra')?.errors?.['pattern']) {
               <small class="text-danger font-italic">Incorrect formatting (8 to 16 characters, at least one uppercase, one lowercase, one number, and one special character)</small>
             }
@@ -126,8 +147,10 @@
         <div class="mb-3">
           <label for="localización" class="form-label">Password</label>
           <input type="text" class="form-control" formControlName="contra" placeholder="Ingrese contraseña del usuario">
+          <!--If para saber si el campo está relleno-->
           @if (frm.get('contra')?.errors?.['required'] && contra.dirty) {
             <small class="text-danger font-italic">Required Data</small>
+          <!--If para saber si el campo está correcto-->
           }@else if (frm.get('contra')?.errors?.['pattern']) {
             <small class="text-danger font-italic">Incorrect formatting (8 to 16 characters, at least one uppercase, one lowercase, one number, and one special character)</small>
           }
@@ -140,35 +163,41 @@
             <option value="participante">Competitor</option>
             <option value="admin">Administrator</option>
           </select>
+          <!--If para saber si el campo está relleno-->
         @if (frm.get('rol')?.errors?.['required'] && rol.dirty) {
             <small class="text-danger font-italic">Required Data</small>
         }
       </div>
+      <!--If empleado para saber si mostrar las carácteristicas. Dependiendo de si es para crear o editar-->
         @if (idUsuario != null) {
             <div class="mb-3">
-                <label for="localización" class="form-label">Points</label>
-                <input type="number" class="form-control" formControlName="puntos" placeholder="Enter user points">
+                <label for="localización" class="form-label">Points (Cannot be less than 0)</label>
+                <input min="0" type="number" class="form-control" formControlName="puntos" placeholder="Enter user points">
+                 <!--If para saber si el campo está relleno-->
                 @if (frm.get('puntos')?.errors?.['required'] && puntos.dirty) {
                     <small class="text-danger font-italic">Required Data</small>
                   }
               </div>
               <div class="mb-3">
-                <label for="localización" class="form-label">Tournaments won</label>
-                <input type="number" class="form-control" formControlName="torneos_ganados" placeholder="Enter the user's won tournaments">
+                <label for="localización" class="form-label">Tournaments won (Cannot be less than 0)</label>
+                <input min="0" type="number" class="form-control" formControlName="torneos_ganados" placeholder="Enter the user's won tournaments">
+                 <!--If para saber si el campo está relleno-->
                 @if (frm.get('torneos_ganados')?.errors?.['required'] && torneos_ganados.dirty) {
                     <small class="text-danger font-italic">Required Data</small>
                   }
               </div>
               <div class="mb-3">
-                <label for="localización" class="form-label">Races won</label>
-                <input type="number" class="form-control" formControlName="carreras_ganadas" placeholder="Enter the user's races won">
+                <label for="localización" class="form-label">Races won (Cannot be less than 0)</label>
+                <input min="0" type="number" class="form-control" formControlName="carreras_ganadas" placeholder="Enter the user's races won">
+                 <!--If para saber si el campo está relleno-->
                 @if (frm.get('carreras_ganadas')?.errors?.['required'] && carreras_ganadas.dirty) {
                     <small class="text-danger font-italic">Required Data</small>
                   }
               </div>
               <div class="mb-3">
-                <label for="localización" class="form-label">Podiums</label>
-                <input type="number" class="form-control" formControlName="podios" placeholder="Enter user podiums" value="0">
+                <label for="localización" class="form-label">Podiums (Cannot be less than 0)</label>
+                <input min="0" type="number" class="form-control" formControlName="podios" placeholder="Enter user podiums" value="0">
+                 <!--If para saber si el campo está relleno-->
                 @if (frm.get('podios')?.errors?.['required'] && podios.dirty) {
                     <small class="text-danger font-italic">Required Data</small>
                   }

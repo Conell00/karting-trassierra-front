@@ -9,6 +9,7 @@
 <body>
 
 <div class="container">
+  <!--If para averiguar el idioma establecido en la página-->
   @if (idioma == 'es') {
   <h1 class="text-center titulo">Torneos Karting Trassierra</h1>
   <div class="d-flex flex-column align-items-center">
@@ -25,6 +26,7 @@
           </tr>
         </thead>
         <tbody>
+          <!--For empleado para recorrer todos los torneos-->
             @for (torneo of aTorneos; track $index) {
                 <tr>
                     <td>{{torneo.id}}</td>
@@ -44,7 +46,6 @@
                     </td>
                   </tr>
             }
-          <!-- Puedes agregar más filas aquí si es necesario -->
         </tbody>
       </table>
       <div class="botones">
@@ -68,6 +69,7 @@
           </tr>
         </thead>
         <tbody>
+          <!--For empleado para recorrer todos los torneos-->
           @for (torneo of aTorneos; track $index) {
             <tr>
               <td>{{torneo.id}}</td>
@@ -87,7 +89,6 @@
               </td>
             </tr>
         }
-          <!-- Puedes agregar más filas aquí si es necesario -->
         </tbody>
       </table>
       <div class="botones">

@@ -31,7 +31,7 @@ export class ToursCrudComponent implements OnInit {
   }
 
   /**
-   * Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
+   * @description Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
    * En caso de ya estar creada la cookie se establece la variable idioma según el valor de estar.
    */
 
@@ -43,7 +43,10 @@ idiomaEstablecido(){
     this.idioma = this.cookies.get('idioma')
   }
 }
-
+  /**
+  * @description Método empleado para saber si el usuario que ha entrado es administrador o no.
+  * En caso de que sea administrador no se permitirá su acceso a esta página
+  */
   verificarUsuario(){
     this.serv_usuarios.getUsuarioId(parseInt(this.cookies.get('token'))).subscribe(
       res=>{
@@ -58,23 +61,42 @@ idiomaEstablecido(){
     )
 }
 
+  /**
+  * @description Método empleado para llevar al formulario de torneos para crear uno nuevo
+  */
+
   formularioCrear(){
     this._router.navigate(['/tourForm']);
   }
+
+  /**
+   * @description Método empleado para ir hacía atrás
+   */
 
   volverMenu(){
     this._router.navigate(['/cruds']);
   }
 
+  /**
+   * @description Método empleado para llevar al formulario de torneos para editar el circuito seleccionado
+   * @param id id del torneo a editar
+   */
+
   formularioEditar(id:number){
     this._router.navigate([`/tourForm/${id}`]);
   }
+
+  /**
+   * @description Método empleado para formatear la fecha
+   * @param fecha Fecha procedente de la base de datos
+   * @returns Fecha formateada
+   */
 
   formatoFecha(fecha:string){
     return `${parseInt(fecha.slice(8,10))}/${fecha.slice(5,7)}/${fecha.slice(0,4)}`
   }
     /**
-     * Método empleado para ajustar la hora a España (ya que la base de datos está alojada en europa del este
+     * @description Método empleado para ajustar la hora a España (ya que la base de datos está alojada en europa del este
      * y la función CURDATE() de MySql coge la hora local)
      * @param time hora europa del este
      * @returns hora española
@@ -85,7 +107,7 @@ idiomaEstablecido(){
   }
 
   /**
-   * Método empleado para borrar el torneo seleccionado
+   * @description Método empleado para borrar el torneo seleccionado
    * @param torneo Torneo a borrar
    */
 
@@ -122,7 +144,6 @@ idiomaEstablecido(){
         clearInterval(timerInterval);
       }
     }).then((result) => {
-      /* Read more about handling dismissals below */
       if (result.dismiss === Swal.DismissReason.timer) {
         this.cargarTorneos()
       }
@@ -163,7 +184,6 @@ idiomaEstablecido(){
         clearInterval(timerInterval);
       }
     }).then((result) => {
-      /* Read more about handling dismissals below */
       if (result.dismiss === Swal.DismissReason.timer) {
         this.cargarTorneos()
       }
@@ -174,6 +194,10 @@ idiomaEstablecido(){
       })
     }
   }
+
+  /**
+   * @description Método empleado para mostrar todos los torneos
+   */
 
   cargarTorneos(){
     let torneo = 0;

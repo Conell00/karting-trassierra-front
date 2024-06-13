@@ -7,8 +7,8 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
 <div class="container">
+  <!--If para averiguar el idioma establecido en la página-->
   @if (idioma == 'es') {
   <h1 class="text-center titulo">Usuarios Karting Trassierra</h1>
   <div class="d-flex flex-column align-items-center">
@@ -27,6 +27,7 @@
           </tr>
         </thead>
         <tbody>
+          <!--For empleado para recorrer todos los usuarios-->
             @for (usuario of aUsuarios; track $index) {
                 <tr>
                     <td>{{usuario.id}}</td>
@@ -54,7 +55,6 @@
                     </td>
                   </tr>
             }
-          <!-- Puedes agregar más filas aquí si es necesario -->
         </tbody>
       </table>
       <div class="botones">
@@ -72,6 +72,7 @@
           <div class="form-outline mb-4">
             <label class="form-label" for="form2Example11">Mensaje</label>
             <textarea class="form-control" formControlName="cuerpo" rows="3" placeholder="Introduzca mensaje"></textarea>
+            <!--If empleado para comprobar que el campo está relleno-->
             @if (frm.get('cuerpo')?.errors?.['required']) {
               <small class="text-danger font-italic">Dato requerido</small>
             }
@@ -79,6 +80,7 @@
           <div class="form-outline mb-4">
             <label class="form-label" for="form2Example11">Mensaje inglés</label>
             <textarea class="form-control" formControlName="cuerpo_en" rows="3" placeholder="Introduzca mensaje en inglés"></textarea>
+            <!--If empleado para comprobar que el campo está relleno-->
             @if (frm.get('cuerpo_en')?.errors?.['required']) {
               <small class="text-danger font-italic">Dato requerido</small>
             }
@@ -107,6 +109,7 @@
           </tr>
         </thead>
         <tbody>
+          <!--For empleado para recorrer todos los usuarios-->
           @for (usuario of aUsuarios; track $index) {
             <tr>
                 <td>{{usuario.id}}</td>
@@ -125,6 +128,7 @@
                     <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
                   </svg>
+                  <!--If empleado para que el usuario no se pueda enviar un mensaje así mismo-->
                   @if (admin != usuario.id) {
                     <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-envelope-arrow-up" viewBox="0 0 16 16" (click)="modalMensaje(usuario.id,usuario.nombre)">
                       <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v4.5a.5.5 0 0 1-1 0V5.383l-7 4.2-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h5.5a.5.5 0 0 1 0 1H2a2 2 0 0 1-2-1.99zm1 7.105 4.708-2.897L1 5.383zM1 4v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1"/>
@@ -153,6 +157,7 @@
     <div class="form-outline mb-4">
       <label class="form-label" for="form2Example11">Message</label>
       <textarea class="form-control" formControlName="cuerpo" rows="3" placeholder="Enter message"></textarea>
+      <!--If empleado para comprobar que el campo está relleno-->
       @if (frm.get('cuerpo')?.errors?.['required']) {
         <small class="text-danger font-italic">Required Data</small>
       }
@@ -160,6 +165,7 @@
     <div class="form-outline mb-4">
       <label class="form-label" for="form2Example11">English message</label>
       <textarea class="form-control" formControlName="cuerpo_en" rows="3" placeholder="Enter message in English"></textarea>
+      <!--If empleado para comprobar que el campo está relleno-->
       @if (frm.get('cuerpo_en')?.errors?.['required']) {
         <small class="text-danger font-italic">Required Data</small>
       }

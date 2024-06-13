@@ -68,6 +68,8 @@ export class UserFormComponent implements OnInit {
      this.verificarUsuario()
   }
 
+  //Getters del formulario
+
   get nombre(){
     return this.frm.get('nombre') as FormControl
   }
@@ -94,7 +96,7 @@ export class UserFormComponent implements OnInit {
   }
 
   /**
-   * Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
+   * @description Método empleado para establecer como idioma por defecto el castellano y crear la cookie.
    * En caso de ya estar creada la cookie se establece la variable idioma según el valor de estar.
    */
 
@@ -107,6 +109,11 @@ export class UserFormComponent implements OnInit {
     }
     console.log(this.idioma);
   }
+
+  /**
+ * @description Método empleado para saber si el usuario que ha entrado es administrador o no.
+ * En caso de que sea administrador no se permitirá su acceso a esta página
+ */
 
   verificarUsuario(){
     this.serv_usuarios.getUsuarioId(parseInt(this.cookies.get('token'))).subscribe(
@@ -121,6 +128,9 @@ export class UserFormComponent implements OnInit {
       }
     )
 }
+  /**
+   * @description Método empleado para cargar los datos de los usuarios
+   */
 
   cargarUsuario(){
     this.serv_usuarios.getUsuarioId(this.idUsuario).subscribe(
@@ -146,6 +156,10 @@ export class UserFormComponent implements OnInit {
     )
   }
 
+  /**
+   * @description Método empleado para saber si los datos del formulario son para crear o editar
+   */
+
   comprobarDatos(){
     if (this.idUsuario) {
      this.editarUsuario();
@@ -153,6 +167,10 @@ export class UserFormComponent implements OnInit {
       this.crearUsuario();
     }
   }
+
+  /**
+   * @description Método empleado para crear al usuario
+   */
 
   crearUsuario(){
     delete  this.frm.value.puntos
@@ -183,7 +201,6 @@ export class UserFormComponent implements OnInit {
       clearInterval(timerInterval);
     }
   }).then((result) => {
-    /* Read more about handling dismissals below */
     if (result.dismiss === Swal.DismissReason.timer) {
         this.frm.reset(); //Limpiar formulario
         this._router.navigate(['/usersCrud']) //Cargar el componente crud
@@ -209,7 +226,6 @@ export class UserFormComponent implements OnInit {
       clearInterval(timerInterval);
     }
   }).then((result) => {
-    /* Read more about handling dismissals below */
     if (result.dismiss === Swal.DismissReason.timer) {
         this.frm.reset(); //Limpiar formulario
         this._router.navigate(['/usersCrud']) //Cargar el componente crud
@@ -226,11 +242,14 @@ export class UserFormComponent implements OnInit {
     )
   }
 
+  /**
+   * @description Método empleado para editar al usuario
+   */
+
   editarUsuario(){
     if (this.frm.value.contra == '') {
       delete  this.frm.value.contra
     }
-    console.log(this.frm.value);
     this.serv_usuarios.updateUsuario(this.frm.value, this.idUsuario).subscribe(
       res=>{
         if (res) {
@@ -255,7 +274,6 @@ export class UserFormComponent implements OnInit {
       clearInterval(timerInterval);
     }
   }).then((result) => {
-    /* Read more about handling dismissals below */
     if (result.dismiss === Swal.DismissReason.timer) {
         this.frm.reset(); //Limpiar formulario
         this._router.navigate(['/usersCrud']) //Cargar el componente crud
@@ -281,7 +299,6 @@ export class UserFormComponent implements OnInit {
       clearInterval(timerInterval);
     }
   }).then((result) => {
-    /* Read more about handling dismissals below */
     if (result.dismiss === Swal.DismissReason.timer) {
         this.frm.reset(); //Limpiar formulario
         this._router.navigate(['/usersCrud']) //Cargar el componente crud
@@ -297,6 +314,10 @@ export class UserFormComponent implements OnInit {
       }
     )
   }
+
+  /**
+   * @description Método empleado para volve hacía atrás
+   */
 
   VolverCrud(){
     this._router.navigate(['/usersCrud']);
