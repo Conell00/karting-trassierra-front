@@ -27,25 +27,29 @@
         </thead>
         <tbody>
           <!--For empleado para recorrer todos los torneos-->
+          @if (aTorneos.length > 0) {
             @for (torneo of aTorneos; track $index) {
-                <tr>
-                    <td>{{torneo.id}}</td>
-                    <td >{{torneo.nombre}}</td>
-                    <td>{{formatoFecha(torneo.fecha)}}</td>
-                    <td class="movilNo">{{formatoHora(torneo.hora)}}</td>
-                    <td class="movilNo">{{torneo.imagen}}</td>
-                    <td class="movilNo">{{torneo.descripcion}}</td>
-                    <td class="acciones">
-                        <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-highlighter" viewBox="0 0 16 16" (click)="formularioEditar(torneo.id)">
-                            <path fill-rule="evenodd" d="M11.096.644a2 2 0 0 1 2.791.036l1.433 1.433a2 2 0 0 1 .035 2.791l-.413.435-8.07 8.995a.5.5 0 0 1-.372.166h-3a.5.5 0 0 1-.234-.058l-.412.412A.5.5 0 0 1 2.5 15h-2a.5.5 0 0 1-.354-.854l1.412-1.412A.5.5 0 0 1 1.5 12.5v-3a.5.5 0 0 1 .166-.372l8.995-8.07zm-.115 1.47L2.727 9.52l3.753 3.753 7.406-8.254zm3.585 2.17.064-.068a1 1 0 0 0-.017-1.396L13.18 1.387a1 1 0 0 0-1.396-.018l-.068.065zM5.293 13.5 2.5 10.707v1.586L3.707 13.5z"/>
-                          </svg>
-                        <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16" (click)="eliminarCircuito(torneo)">
-                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+              <tr>
+                <td>{{torneo.id}}</td>
+                <td>{{torneo.nombre}}</td>
+                <td>{{formatoFecha(torneo.fecha)}}</td>
+                <td class="movilNo">{{formatoHora(torneo.hora)}}</td>
+                <td class="movilNo">{{torneo.imagen}}</td>
+                <td class="movilNo">{{torneo.descripcion}}</td>
+                <td class="acciones">
+                    <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-highlighter" viewBox="0 0 16 16" (click)="formularioEditar(torneo.id)">
+                        <path fill-rule="evenodd" d="M11.096.644a2 2 0 0 1 2.791.036l1.433 1.433a2 2 0 0 1 .035 2.791l-.413.435-8.07 8.995a.5.5 0 0 1-.372.166h-3a.5.5 0 0 1-.234-.058l-.412.412A.5.5 0 0 1 2.5 15h-2a.5.5 0 0 1-.354-.854l1.412-1.412A.5.5 0 0 1 1.5 12.5v-3a.5.5 0 0 1 .166-.372l8.995-8.07zm-.115 1.47L2.727 9.52l3.753 3.753 7.406-8.254zm3.585 2.17.064-.068a1 1 0 0 0-.017-1.396L13.18 1.387a1 1 0 0 0-1.396-.018l-.068.065zM5.293 13.5 2.5 10.707v1.586L3.707 13.5z"/>
                       </svg>
-                    </td>
-                  </tr>
-            }
+                    <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16" (click)="eliminarCircuito(torneo)">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                  </svg>
+                </td>
+              </tr>
+        }
+          }@else {
+            <tr><td colspan="7" class="mensaje">No hay torneos</td></tr>
+          }
         </tbody>
       </table>
       <div class="botones">
@@ -69,26 +73,30 @@
           </tr>
         </thead>
         <tbody>
-          <!--For empleado para recorrer todos los torneos-->
-          @for (torneo of aTorneos; track $index) {
-            <tr>
-              <td>{{torneo.id}}</td>
-              <td>{{torneo.nombre}}</td>
-              <td>{{formatoFecha(torneo.fecha)}}</td>
-              <td class="movilNo">{{formatoHora(torneo.hora)}}</td>
-              <td class="movilNo">{{torneo.imagen}}</td>
-              <td class="movilNo">{{torneo.descripcion_en}}</td>
-              <td class="acciones">
-                  <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-highlighter" viewBox="0 0 16 16" (click)="formularioEditar(torneo.id)">
-                      <path fill-rule="evenodd" d="M11.096.644a2 2 0 0 1 2.791.036l1.433 1.433a2 2 0 0 1 .035 2.791l-.413.435-8.07 8.995a.5.5 0 0 1-.372.166h-3a.5.5 0 0 1-.234-.058l-.412.412A.5.5 0 0 1 2.5 15h-2a.5.5 0 0 1-.354-.854l1.412-1.412A.5.5 0 0 1 1.5 12.5v-3a.5.5 0 0 1 .166-.372l8.995-8.07zm-.115 1.47L2.727 9.52l3.753 3.753 7.406-8.254zm3.585 2.17.064-.068a1 1 0 0 0-.017-1.396L13.18 1.387a1 1 0 0 0-1.396-.018l-.068.065zM5.293 13.5 2.5 10.707v1.586L3.707 13.5z"/>
-                    </svg>
-                  <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16" (click)="eliminarCircuito(torneo)">
-                  <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                  <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
-                </svg>
-              </td>
-            </tr>
+          @if (aTorneos.length > 0) {
+            @for (torneo of aTorneos; track $index) {
+              <tr>
+                <td>{{torneo.id}}</td>
+                <td>{{torneo.nombre}}</td>
+                <td>{{formatoFecha(torneo.fecha)}}</td>
+                <td class="movilNo">{{formatoHora(torneo.hora)}}</td>
+                <td class="movilNo">{{torneo.imagen}}</td>
+                <td class="movilNo">{{torneo.descripcion_en}}</td>
+                <td class="acciones">
+                    <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-highlighter" viewBox="0 0 16 16" (click)="formularioEditar(torneo.id)">
+                        <path fill-rule="evenodd" d="M11.096.644a2 2 0 0 1 2.791.036l1.433 1.433a2 2 0 0 1 .035 2.791l-.413.435-8.07 8.995a.5.5 0 0 1-.372.166h-3a.5.5 0 0 1-.234-.058l-.412.412A.5.5 0 0 1 2.5 15h-2a.5.5 0 0 1-.354-.854l1.412-1.412A.5.5 0 0 1 1.5 12.5v-3a.5.5 0 0 1 .166-.372l8.995-8.07zm-.115 1.47L2.727 9.52l3.753 3.753 7.406-8.254zm3.585 2.17.064-.068a1 1 0 0 0-.017-1.396L13.18 1.387a1 1 0 0 0-1.396-.018l-.068.065zM5.293 13.5 2.5 10.707v1.586L3.707 13.5z"/>
+                      </svg>
+                    <svg style="cursor: pointer;" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16" (click)="eliminarCircuito(torneo)">
+                    <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                  </svg>
+                </td>
+              </tr>
         }
+          }@else {
+            <tr><td colspan="7" class="mensaje">There are no tournaments</td></tr>
+          }
+          <!--For empleado para recorrer todos los torneos-->
         </tbody>
       </table>
       <div class="botones">

@@ -204,6 +204,7 @@ idiomaEstablecido(){
     this.serv_torneo.getTorneos().subscribe(resTorneo=>{
       if (resTorneo) {
         this.aTorneos = resTorneo;
+        console.log(this.aTorneos);
       }else{
         Swal.fire({
           title: "Ha ocurrido algún error al cargar los torneos",
