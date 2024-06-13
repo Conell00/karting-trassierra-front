@@ -34,12 +34,12 @@
       </div>
       <div class="mb-3">
         <label for="localización" class="form-label">Hora</label>
-        <input type="time" class="form-control" formControlName="hora" placeholder="Ingrese distancia circuito" min="12:00" max="20:00" required>
+        <input type="time" class="form-control" formControlName="hora" placeholder="Ingrese distancia circuito">
         <!--If para saber si el campo está relleno-->
         @if (frm.get('hora')?.errors?.['required'] && hora.dirty) {
             <small class="text-danger font-italic">Dato requerido</small>
           }@else if (frm.get('hora')?.errors?.['passwordIdem']) {
-            <small class="text-danger font-italic">Horario de torneos: 12:00-20:00</small>
+            <small class="text-danger font-italic">Horario de torneos: 10:00-20:00</small>
           }
       </div>
       <div class="mb-3">
@@ -143,7 +143,7 @@
         @if (frm.get('hora')?.errors?.['required'] && hora.dirty) {
             <small class="text-danger font-italic">Required Data</small>
           }@else if (frm.get('hora')?.errors?.['passwordIdem']) {
-            <small class="text-danger font-italic">Tournament hours: 12:00-20:00</small>
+            <small class="text-danger font-italic">Tournament hours: 10:00-20:00</small>
           }
       </div>
       <div class="mb-3">

@@ -109,7 +109,7 @@ export class ToursFormComponent implements OnInit {
   comprobarHora(control:AbstractControl){
     if (this.frm) { //Verificar si frm está defenido antes de acceder a los controles.
       const hora = this.frm.get('hora')?.value;
-     return hora > '12:00' && hora < '20:01'?null : {passwordIdem:true}
+     return hora > '09:59' && hora < '20:01'?null : {passwordIdem:true}
     }else{
       return null
     }
@@ -117,7 +117,7 @@ export class ToursFormComponent implements OnInit {
 
   /**
    * @description Método empleado para comprobar que la fecha es correcta
-   * @param control 
+   * @param control
    * @returns true o false, dependiendo de si la fecha no es inferior al día de hoy
    */
 

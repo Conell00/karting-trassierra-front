@@ -455,7 +455,7 @@ export class ProfileComponent implements OnInit,OnDestroy {
                 position: 'top-end',
                 title: "Cuenta borrada. Esperamos verlo pronto en la pista!",
                 imageUrl: '../../../assets/img/boton-eliminar.png',
-                timer: 1300,
+                timer: 4000,
                 timerProgressBar: true,
                 width: '500px',
                 background: 'white',
